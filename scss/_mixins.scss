@@ -1,0 +1,146 @@
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Mixins & Constants Stylesheet
+
+This is where you can take advantage of Sass' great features:
+Mixins & Constants. I won't go in-depth on how they work exactly,
+there are a few articles below that will help do that. What I will
+tell you is that this will help speed up simple changes like
+changing a color or adding CSS3 techniques gradients.
+
+A WORD OF WARNING: It's very easy to overdo it here. Be careful and
+remember less is more.
+
+******************************************************************/
+
+/********************
+FONT FACE
+******************/
+
+//the below is just for reference
+/*@font-face {
+    font-family: 'League Gothic';
+    src: url('../fonts/leaguegothic/leaguegothic-regular-webfont.eot');
+    src: url('../fonts/leaguegothic/leaguegothic-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/leaguegothic/leaguegothic-regular-webfont.woff') format('woff'),
+         url('../fonts/leaguegothic/leaguegothic-regular-webfont.ttf') format('truetype'),
+         url('../fonts/leaguegothic/leaguegothic-regular-webfont.svg#league_gothicregular') format('svg');
+    font-weight: normal;
+}*/
+
+/*********************
+COLORS
+Need help w/ choosing your colors? Try this site out:
+http://0to255.com/
+*********************/
+
+$offBlack:			#2f4556;
+$white:             #fff;
+$offWhite:			#fbfbfa;
+$red:				#ff5555;
+
+/*
+Here's a great tutorial on how to
+use color variables properly:
+http://sachagreif.com/sass-color-variables/
+*/
+
+
+/*********************
+ELEMENT COLOURS
+*********************/
+
+$background:		$offWhite;
+
+$hr:				$red;
+
+$text:				$offBlack;
+$link-color:		darken( $red, 20% );
+$link-hover:		$red;
+
+$selection:			$red;
+$selection-text:	$white;
+
+$buttonBg:			$red;
+$button-link:		$white;
+$buttonBg-hover:	lighten( $red, 8% );
+$button-link-hover:	lighten( $white, 8% );
+
+/*********************
+TYPOGRAPHY
+*********************/
+
+$sans-serif:        "Helvetica Neue", Helvetica, Arial, sans-serif;
+$serif:             "Georgia", Cambria, Times New Roman, Times, serif;
+
+/*
+use the best ampersand
+http://simplebits.com/notebook/2008/08/14/ampersands-2/
+*/
+span.amp {
+  font-family: Baskerville,''Libre Baskerville' Old Style',Palatino,'Book Antiqua',serif !important;
+  font-style: italic;
+}
+
+// text alignment
+/////check whether you actually need this?
+.text-left   { text-align: left; }
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+
+/*********************
+TRANSITION
+*********************/
+
+/*********************
+VARIOUS MIXINS
+*********************/
+	
+/* @include css-gradient(#dfdfdf,#f8f8f8); */																		//I imght get rid of this as it's not versatile enough?
+@mixin css-gradient($from: #dfdfdf, $to: #f8f8f8) {
+	background-color: $to;
+	background-image: -webkit-gradient(linear, left top, left bottom, from($from), to($to));
+	background-image: -webkit-linear-gradient(top, $from, $to);
+	background-image: -moz-linear-gradient(top, $from, $to);
+	background-image: -o-linear-gradient(top, $from, $to);
+	background-image: linear-gradient(to bottom, $from, $to);
+}
+
+@mixin box-shadow( $top, $left, $blur, $color ) {
+	-webkit-box-shadow:$top $left $blur $color;
+	-moz-box-shadow:$top $left $blur $color;
+	box-shadow:$top $left $blur $color;
+}
+
+@mixin border-radiusAll( $all ) {
+	-webkit-border-radius:$all;
+	-moz-border-radius:$all;
+	border-radius:$all;
+}
+
+/*
+I totally rewrote this to be cleaner and easier to use.
+You'll need to be using Sass 3.2+ for these to work.
+Thanks to @anthonyshort for the inspiration on these.
+USAGE: @include transition(all 0.2s ease-in-out);
+*/
+
+@mixin transition($transition...) {
+	// defining prefixes so we can use them in mixins below
+	$prefixes:      ("-webkit", "-ms", "-o",  "");
+  @each $prefix in $prefixes {
+    #{$prefix}-transition: $transition;
+  }
+
+  transition: $transition;
+}
+
+@mixin rotate( $deg ) {
+	-moz-transform:rotate( $deg );
+	-webkit-transform: rotate( $deg );
+	-o-transform: rotate( $deg );
+	-ms-transform: rotate( $deg );
+	transform: rotate( $deg );
+}

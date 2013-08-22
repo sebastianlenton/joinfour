@@ -1,0 +1,254 @@
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Base Mobile Stylesheet
+
+Be light and don't over style since everything here will be
+loaded by mobile devices. You want to keep it as minimal as
+possible. This is called at the top of the main stylsheet
+and will be used across all viewports.
+
+******************************************************************/
+
+/*********************
+GENERAL STYLES
+*********************/
+
+html,
+button,
+input,
+select,
+textarea {
+    color:$text;
+}
+
+::-moz-selection {
+    background: $selection;
+    color:$selection-text;
+    text-shadow: none;
+}
+
+::selection {
+    background: $selection;
+    color:$selection-text;
+    text-shadow: none;
+}
+
+hr {
+    display: block;
+    height: 0.1875em;
+    border: 0;
+    margin: 1.31em 0;
+    padding: 0;
+   	color: $hr;
+	background-color: $hr;
+	position:relative;
+	top:-.09375em;
+}
+
+img {
+    vertical-align: middle;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/*********************
+LAYOUT & GRID STYLES
+*********************/
+
+
+/*********************
+LINK STYLES
+*********************/
+
+a, a:visited {
+	color:$link-color;
+
+	/* on hover */
+	&:hover, &:focus {
+		color:$link-hover;
+	}
+
+	/* on click */
+	&:active {
+
+	}
+
+	/* mobile tap color */
+	&:link {
+		/*
+		this highlights links on ip5ones/iPads.
+		so it basically works like the :hover selector
+		for mobile devices.
+		*/
+		-webkit-tap-highlight-color : rgba( 0, 0, 0, 0.3 );
+	}
+}
+
+/*********************
+TYPE
+*********************/
+
+body {
+	font-size: 16px;
+	line-height: 1.5;
+	font-family: $sans-serif;
+	background:$background;	
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
+	text-rendering: optimizelegibility;
+	font-weight: 500;
+	/*
+	if you're going to use webfonts, be sure to check your weights
+	http://css-tricks.com/watch-your-font-weight/
+	*/
+
+	font-weight:bold;
+}
+
+h1,h2,h3,h4,h5,p,ul,ol,li,blockquote,hr {						
+	margin-top:0;
+}
+
+h1, .h1 {
+	font-size:2.2em;
+	text-align: center;
+	margin:0 0 .685em 0;
+	line-height:1.37em;
+	font-family:sans-serif;
+	opacity:0.99;
+}
+
+h2, .h2 {
+	font-size:1.45em;
+	margin-bottom:1.04em;
+}
+
+h3, .h3 {
+	font-size:1.15em;
+	margin-bottom:1.3em;
+}
+
+h4, .h4 {
+	font-size:1em;
+	margin-bottom:0.75em;
+}
+
+h5,.h5 {
+	font-size:.9em;
+	margin-bottom:0;
+}
+
+p, li {
+	font-family:$serif;
+	font-size:1em;
+	margin-bottom:1.5em;
+	
+	a {
+		font-weight:bold;
+	}
+}
+
+p.meta {
+	font-size:0.7em;
+}
+
+li {
+	margin-right:3em;
+}
+
+blockquote {
+	margin-bottom:1.5em;
+}
+
+.content {
+	padding-bottom:0.5em;
+	img {
+		width:100%;
+		margin-bottom:1.5em;
+	}
+
+	> p:first-of-type {
+		font-style: italic;
+		font-size:1.25em;
+		margin-bottom:1.2em;
+	}
+}
+
+/*********************
+HEADER STYLES
+*********************/
+
+
+	
+/*********************
+LOGO STYLES
+*********************/
+
+
+
+/*********************
+NAVIGATION STYLES
+*********************/
+
+
+
+/*********************
+SIDEBARS & ASIDES
+*********************/
+
+/*********************
+IMAGES
+*********************/
+
+
+/*********************
+FOOTER STYLES
+*********************/
+
+
+	
+/*********************
+TRANSITIONS & ANIMATIONS
+*********************/
+
+/**************
+BACKGROUNDS
+****************/
+
+
+
+/*********************
+BUTTONS
+*********************/
+
+.button, .button:visited {
+	padding:0.76em  0.8em;
+	display: inline-block;
+	font-weight: bold;
+	text-decoration: none;
+	text-align:center;
+
+	cursor: pointer;
+	background:$buttonBg;
+	color:$button-link;
+
+	&:hover, &:focus {
+		background:$buttonBg-hover;
+		color:$button-link-hover;
+	}
+
+	&:active {
+		//@include css-gradient(darken($link-color, 5%), $link-color);
+	}
+}

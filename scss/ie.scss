@@ -1,0 +1,44 @@
+/******************************************************************
+Site Name: 
+Author: 
+
+Stylesheet: IE Stylesheet
+
+So instead of using the respond.js file to add media query support
+to IE, we're going to use SASS to create an easily readable css file.
+Here, we import all the styles the standard stylesheet gets, only
+without the media queries. No need to worry about editing anything!
+
+******************************************************************/
+
+//note, this is currently called in addition to the regular styles in IE (most of which it obv doesn't understand). Modernizr stuff is called as part of regular styles.
+//there's probably a way of slimming down the amount of CSS IE ends up with - but it's quite probably not really worth doing.
+
+/*
+Remember, all the BASE styles are called already since IE can
+read those. Below, we need to import only the stuff IE can't 
+understand (what's inside the media queries). We also need to
+import the mixins file so SASS can understand the variables.
+*/
+
+/* import mixins */
+@import "mixins";
+
+@import "480up";					//uncomment these (or add to them) depending on the situation
+@import "768up";
+@import "1030up";
+
+/* 
+you can call the larger styles if you want, but there's really no need 
+*/
+
+
+/******************************************************************
+ADDITIONAL IE FIXES
+These fixes are now ONLY seen by IE, so you don't have to worry
+about using prefixes, although it's best practice. For more info
+on using Modernizr classes, check out this link:
+http://www.modernizr.com/docs/
+******************************************************************/
+
+//IE-specific fallbacks go here - for feature-sniffing fallbacks which work in older versions of other browsers, see _modernize.scss

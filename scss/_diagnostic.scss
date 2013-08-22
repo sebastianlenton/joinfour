@@ -1,0 +1,186 @@
+/*********************
+small rubbish diagnostic reset
+*********************/
+
+#SFLDiagnostic{
+	h1, h2, .h1, p {
+		background:none;
+	}
+}
+
+/*********************
+DIAGNOSTIC
+*********************/
+
+$blackTrans75:		rgba( 0, 0, 0, 0.75 );
+$white:             #fff;
+$lightBlue:			rgba( 0,0,255,0.075 );//lighten( $blue, 20% );
+
+	
+#SFLDiagnostic.overlay {
+	background:$blackTrans75;
+	color:$white;
+	opacity:0;
+	visibility:hidden;
+	width:100%;
+	height:180%;
+	position:fixed;
+	top:0;
+	-webkit-transition-property: opacity,visibility;
+	-webkit-transition-duration: 0.5s,0.5s;
+	
+	h2 {
+		float:right;
+	}
+
+	.button {
+		float:right;
+		clear:both;
+		margin-bottom:1em;
+	}
+}
+
+.consoleContainer {
+	position:fixed;
+	bottom:0;
+	height:5em;
+	width:100%;
+	color:$white;
+	background:$blackTrans75;
+	overflow:hidden;
+	display:none;
+
+	&.animate {
+		display:block;
+		opacity:1;
+	}
+	
+	#console {
+		position:absolute;
+		bottom:0;
+	
+		p {
+			font-family:monaco, 'lucida console',monospace;
+			line-height:1;
+			margin:0;
+		}
+	}
+}
+
+
+.diagBox {
+	display:block;
+	padding:0.1em 1em 0.1em .5em;
+	background:$blackTrans75;
+	color:$white;
+	position:fixed;
+	bottom:10px;
+	right:0;
+	z-index:99999;
+	font-size:.7em;
+	opacity:0.6;
+	-webkit-transition-property: opacity;
+	-webkit-transition-duration: 0.07s;
+	
+	&:hover {
+		opacity:1;
+	}
+}
+
+	
+/*********************
+TRANSITIONS & ANIMATIONS
+*********************/
+
+#SFLDiagnostic.overlay.animate {
+	opacity: 1;
+	visibility: visible;
+}
+
+/*********************
+BACKGROUND GRIDS
+*********************/
+
+.ruler body {
+	background-image:url( '../img/diagnostic/BGResponsiveScaffold.png' );
+}
+
+.ruler.verticalGuides body {
+	background-image:url( '../img/diagnostic/BGVRhythm320.png' ), url( '../img/diagnostic/BGResponsiveScaffold.png' );
+}
+
+.verticalGuides body {
+	background-image:url( '../img/diagnostic/BGVRhythm320.png' );
+}
+
+/*********************
+COLOURED BLOCK ELEMENTS
+*********************/
+
+.w66 {
+	//background:gold;
+}
+
+.w33 {
+	//background:Orange;
+}
+
+.typeBg {
+		h1,h2,h3,h4,h5,p,ul,ol,li,blockquote {
+		background:$lightBlue;
+	}
+}
+
+@media only screen and (min-width: 30em) {								//480px
+
+}
+
+@media only screen and (min-width: 35.5em) {							//568px
+	.ruler.verticalGuides body {
+		background-image:url( '../img/diagnostic/BGVRhythm568.png' ), url( '../img/diagnostic/BGResponsiveScaffold.png' );
+	}
+	
+	.verticalGuides body {
+		background-image:url( '../img/diagnostic/BGVRhythm568.png' );
+	}
+}
+
+@media only screen and (min-width: 41.75em) {							//668px
+	.ruler.verticalGuides body {
+		background-image:url( '../img/diagnostic/BGVRhythm668.png' ), url( '../img/diagnostic/BGResponsiveScaffold.png' );
+	}
+	
+	.verticalGuides body {
+		background-image:url( '../img/diagnostic/BGVRhythm668.png' );
+	}
+}
+
+@media only screen and (min-width: 48em) {								//768px
+	.ruler.verticalGuides body {
+		background-image:url( '../img/diagnostic/BGVRhythm768.png' ), url( '../img/diagnostic/BGResponsiveScaffold.png' );
+	}
+	
+	.verticalGuides body {
+		background-image:url( '../img/diagnostic/BGVRhythm768.png' );
+	}
+}
+
+@media only screen and (min-width: 77.5em) {							//1240px
+	.ruler.verticalGuides body {
+		background-image:url( '../img/diagnostic/BGVRhythm1240.png' ), url( '../img/diagnostic/BGResponsiveScaffold.png' );
+	}
+	
+	.verticalGuides body {
+		background-image:url( '../img/diagnostic/BGVRhythm1240.png' );
+	}
+}
+
+@media only screen and (min-width: 85.75em) {								//1372px
+.ruler.verticalGuides body {
+		background-image:url( '../img/diagnostic/BGVRhythm1372.png' ), url( '../img/diagnostic/BGResponsiveScaffold.png' );
+	}
+	
+	.verticalGuides body {
+		background-image:url( '../img/diagnostic/BGVRhythm1372.png' );
+	}
+}

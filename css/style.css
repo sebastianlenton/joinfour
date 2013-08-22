@@ -1,0 +1,1554 @@
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Main Stylesheet
+
+Here's where the magic happens. Here, you'll see we are calling in
+the separate media queries. The base mobile goes outside any query
+and is called at the beginning, after that we call the rest
+of the styles inside media queries.
+******************************************************************/
+/* normalize.css v1.1.0 | MIT License | git.io/normalize */
+/* ==========================================================================
+   HTML5 display definitions
+   ========================================================================== */
+/**
+ * Correct `block` display not defined in IE 6/7/8/9 and Firefox 3.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\0000322}}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block; }
+
+/**
+ * Correct `inline-block` display not defined in IE 6/7/8/9 and Firefox 3.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\0000332}}
+audio,
+canvas,
+video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1; }
+
+/**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\0000343}}
+audio:not([controls]) {
+  display: none;
+  height: 0; }
+
+/**
+ * Address styling not present in IE 7/8/9, Firefox 3, and Safari 4.
+ * Known issue: no IE 6 support.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\0000353}}
+[hidden] {
+  display: none; }
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+/**
+ * 1. Correct text resizing oddly in IE 6/7 when body `font-size` is set using
+ *    `em` units.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\0000368}}
+html {
+  font-size: 100%;
+  /* 1 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */ }
+
+/**
+ * Address `font-family` inconsistency between `textarea` and other form
+ * elements.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\0000383}}
+html,
+button,
+input,
+select,
+textarea {
+  font-family: sans-serif; }
+
+/**
+ * Address margins handled incorrectly in IE 6/7.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\0000391}}
+body {
+  margin: 0; }
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+/**
+ * Address `outline` inconsistency between Chrome and other browsers.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003103}}
+a:focus {
+  outline: thin dotted; }
+
+/**
+ * Improve readability when focused and also mouse hovered in all browsers.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003112}}
+a:active,
+a:hover {
+  outline: 0; }
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+/**
+ * Address font sizes and margins set differently in IE 6/7.
+ * Address font sizes within `section` and `article` in Firefox 4+, Safari 5,
+ * and Chrome.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003126}}
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003131}}
+h2 {
+  font-size: 1.5em;
+  margin: 0.83em 0; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003136}}
+h3 {
+  font-size: 1.17em;
+  margin: 1em 0; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003141}}
+h4 {
+  font-size: 1em;
+  margin: 1.33em 0; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003146}}
+h5 {
+  font-size: 0.83em;
+  margin: 1.67em 0; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003151}}
+h6 {
+  font-size: 0.67em;
+  margin: 2.33em 0; }
+
+/**
+ * Address styling not present in IE 7/8/9, Safari 5, and Chrome.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003160}}
+abbr[title] {
+  border-bottom: 1px dotted; }
+
+/**
+ * Address style set to `bolder` in Firefox 3+, Safari 4/5, and Chrome.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003169}}
+b,
+strong {
+  font-weight: bold; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003173}}
+blockquote {
+  margin: 1em 40px; }
+
+/**
+ * Address styling not present in Safari 5 and Chrome.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003181}}
+dfn {
+  font-style: italic; }
+
+/**
+ * Address differences between Firefox and other browsers.
+ * Known issue: no IE 6/7 normalization.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003190}}
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0; }
+
+/**
+ * Address styling not present in IE 6/7/8/9.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003200}}
+mark {
+  background: #ff0;
+  color: #000; }
+
+/**
+ * Address margins set differently in IE 6/7.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003210}}
+p,
+pre {
+  margin: 1em 0; }
+
+/**
+ * Correct font family set oddly in IE 6, Safari 4/5, and Chrome.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003221}}
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, serif;
+  _font-family: "courier new", monospace;
+  font-size: 1em; }
+
+/**
+ * Improve readability of pre-formatted text in all browsers.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003231}}
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word; }
+
+/**
+ * Address CSS quotes not supported in IE 6/7.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003241}}
+q {
+  quotes: none; }
+
+/**
+ * Address `quotes` property not supported in Safari 4.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003250}}
+q:before,
+q:after {
+  content: '';
+  content: none; }
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003259}}
+small {
+  font-size: 80%; }
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003268}}
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003275}}
+sup {
+  top: -0.5em; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003279}}
+sub {
+  bottom: -0.25em; }
+
+/* ==========================================================================
+   Lists
+   ========================================================================== */
+/**
+ * Address margins set differently in IE 6/7.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003294}}
+dl,
+menu,
+ol,
+ul {
+  margin: 1em 0; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003298}}
+dd {
+  margin: 0 0 0 40px; }
+
+/**
+ * Address paddings set differently in IE 6/7.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003308}}
+menu,
+ol,
+ul {
+  padding: 0 0 0 40px; }
+
+/**
+ * Correct list images handled incorrectly in IE 7.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003317}}
+nav ul,
+nav ol {
+  list-style: none;
+  list-style-image: none; }
+
+/* ==========================================================================
+   Embedded content
+   ========================================================================== */
+/**
+ * 1. Remove border when inside `a` element in IE 6/7/8/9 and Firefox 3.
+ * 2. Improve image quality when scaled in IE 7.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003331}}
+img {
+  border: 0;
+  /* 1 */
+  -ms-interpolation-mode: bicubic;
+  /* 2 */ }
+
+/**
+ * Correct overflow displayed oddly in IE 9.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003340}}
+svg:not(:root) {
+  overflow: hidden; }
+
+/* ==========================================================================
+   Figures
+   ========================================================================== */
+/**
+ * Address margin not present in IE 6/7/8/9, Safari 5, and Opera 11.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003352}}
+figure {
+  margin: 0; }
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+/**
+ * Correct margin displayed oddly in IE 6/7.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003364}}
+form {
+  margin: 0; }
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003372}}
+fieldset {
+  border: 1px solid silver;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em; }
+
+/**
+ * 1. Correct color not being inherited in IE 6/7/8/9.
+ * 2. Correct text not wrapping in Firefox 3.
+ * 3. Correct alignment displayed oddly in IE 6/7.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003384}}
+legend {
+  border: 0;
+  /* 1 */
+  padding: 0;
+  white-space: normal;
+  /* 2 */
+  *margin-left: -7px;
+  /* 3 */ }
+
+/**
+ * 1. Correct font size not being inherited in all browsers.
+ * 2. Address margins set differently in IE 6/7, Firefox 3+, Safari 5,
+ *    and Chrome.
+ * 3. Improve appearance and consistency in all browsers.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003401}}
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  /* 1 */
+  margin: 0;
+  /* 2 */
+  vertical-align: baseline;
+  /* 3 */
+  *vertical-align: middle;
+  /* 3 */ }
+
+/**
+ * Address Firefox 3+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003414}}
+button,
+input {
+  line-height: normal; }
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Chrome, Safari 5+, and IE 6+.
+ * Correct `select` style inheritance in Firefox 4+ and Opera.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003426}}
+button,
+select {
+  text-transform: none; }
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ * 4. Remove inner spacing in IE 7 without affecting normal text inputs.
+ *    Known issue: inner spacing remains in IE 6.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003443}}
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+  cursor: pointer;
+  /* 3 */
+  *overflow: visible;
+  /* 4 */ }
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003454}}
+button[disabled],
+html input[disabled] {
+  cursor: default; }
+
+/**
+ * 1. Address box sizing set to content-box in IE 8/9.
+ * 2. Remove excess padding in IE 8/9.
+ * 3. Remove excess padding in IE 7.
+ *    Known issue: excess padding remains in IE 6.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003466}}
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */
+  *height: 13px;
+  /* 3 */
+  *width: 13px;
+  /* 3 */ }
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome
+ *    (include `-moz` to future-proof).
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003479}}
+input[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  /* 2 */
+  box-sizing: content-box; }
+
+/**
+ * Remove inner padding and search cancel button in Safari 5 and Chrome
+ * on OS X.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003492}}
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+/**
+ * Remove inner padding and border in Firefox 3+.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003501}}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+/**
+ * 1. Remove default vertical scrollbar in IE 6/7/8/9.
+ * 2. Improve readability and alignment in all browsers.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003511}}
+textarea {
+  overflow: auto;
+  /* 1 */
+  vertical-align: top;
+  /* 2 */ }
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+/**
+ * Remove most spacing between table cells.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003524}}
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* ==========================================================================
+   SFL Customisations
+   ========================================================================== */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003533}}
+a {
+  text-decoration: none; }
+
+/* ==========================================================================
+   Tools
+   ========================================================================== */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003542}}
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003549}}
+.image-replacement {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003556}}
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003561}}
+.clearfix:after {
+  clear: both; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_normalize\.scss}line{font-family:\00003565}}
+.clearfix {
+  *zoom: 1; }
+
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Mixins & Constants Stylesheet
+
+This is where you can take advantage of Sass' great features:
+Mixins & Constants. I won't go in-depth on how they work exactly,
+there are a few articles below that will help do that. What I will
+tell you is that this will help speed up simple changes like
+changing a color or adding CSS3 techniques gradients.
+
+A WORD OF WARNING: It's very easy to overdo it here. Be careful and
+remember less is more.
+
+******************************************************************/
+/********************
+FONT FACE
+******************/
+/*@font-face {
+    font-family: 'League Gothic';
+    src: url('../fonts/leaguegothic/leaguegothic-regular-webfont.eot');
+    src: url('../fonts/leaguegothic/leaguegothic-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/leaguegothic/leaguegothic-regular-webfont.woff') format('woff'),
+         url('../fonts/leaguegothic/leaguegothic-regular-webfont.ttf') format('truetype'),
+         url('../fonts/leaguegothic/leaguegothic-regular-webfont.svg#league_gothicregular') format('svg');
+    font-weight: normal;
+}*/
+/*********************
+COLORS
+Need help w/ choosing your colors? Try this site out:
+http://0to255.com/
+*********************/
+/*
+Here's a great tutorial on how to
+use color variables properly:
+http://sachagreif.com/sass-color-variables/
+*/
+/*********************
+ELEMENT COLOURS
+*********************/
+/*********************
+TYPOGRAPHY
+*********************/
+/*
+use the best ampersand
+http://simplebits.com/notebook/2008/08/14/ampersands-2/
+*/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_mixins\.scss}line{font-family:\0000388}}
+span.amp {
+  font-family: Baskerville, "" Libre Baskerville " Old Style", Palatino, "Book Antiqua", serif !important;
+  font-style: italic; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_mixins\.scss}line{font-family:\0000395}}
+.text-left {
+  text-align: left; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_mixins\.scss}line{font-family:\0000396}}
+.text-center {
+  text-align: center; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_mixins\.scss}line{font-family:\0000397}}
+.text-right {
+  text-align: right; }
+
+/*********************
+TRANSITION
+*********************/
+/*********************
+VARIOUS MIXINS
+*********************/
+/* @include css-gradient(#dfdfdf,#f8f8f8); */
+/*
+I totally rewrote this to be cleaner and easier to use.
+You'll need to be using Sass 3.2+ for these to work.
+Thanks to @anthonyshort for the inspiration on these.
+USAGE: @include transition(all 0.2s ease-in-out);
+*/
+/*
+BASE (MOBILE) SIZE
+This are the mobile styles. It's what people see on their phones. If
+you set a great foundation, you won't need to add too many styles in
+the other stylesheets. Remember, keep it light: Speed is Important.
+*/
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Base Mobile Stylesheet
+
+Be light and don't over style since everything here will be
+loaded by mobile devices. You want to keep it as minimal as
+possible. This is called at the top of the main stylsheet
+and will be used across all viewports.
+
+******************************************************************/
+/*********************
+GENERAL STYLES
+*********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\0000322}}
+html,
+button,
+input,
+select,
+textarea {
+  color: #2f4556; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\0000326}}
+::-moz-selection {
+  background: #ff5555;
+  color: white;
+  text-shadow: none; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\0000332}}
+::selection {
+  background: #ff5555;
+  color: white;
+  text-shadow: none; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\0000338}}
+hr {
+  display: block;
+  height: 0.1875em;
+  border: 0;
+  margin: 1.31em 0;
+  padding: 0;
+  color: #ff5555;
+  background-color: #ff5555;
+  position: relative;
+  top: -.09375em; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\0000350}}
+img {
+  vertical-align: middle; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\0000354}}
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\0000360}}
+textarea {
+  resize: vertical; }
+
+/*********************
+LAYOUT & GRID STYLES
+*********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\0000367}}
+header {
+  margin-top: 1.5em; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\0000371}}
+.wrap {
+  padding-left: 4%;
+  padding-right: 4%;
+  margin: 0 auto; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\0000376}}
+  .wrap.up1024 {
+    padding: 0; }
+
+/*********************
+LINK STYLES
+*********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\0000385}}
+a, a:visited {
+  color: #ee0000;
+  /* on hover */
+  /* on click */
+  /* mobile tap color */ }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\0000389}}
+  a:hover, a:focus, a:visited:hover, a:visited:focus {
+    color: #ff5555; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\0000399}}
+  a:link, a:visited:link {
+    /*
+    this highlights links on ip5ones/iPads.
+    so it basically works like the :hover selector
+    for mobile devices.
+    */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.3); }
+
+/*********************
+TYPE
+*********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003113}}
+body {
+  font-size: 16px;
+  line-height: 1.5em;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: #fbfbfa;
+  min-height: 30em; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003122}}
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
+  text-rendering: optimizelegibility;
+  font-weight: 500;
+  /*
+  if you're going to use webfonts, be sure to check your weights
+  http://css-tricks.com/watch-your-font-weight/
+  */
+  font-weight: bold; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003133}}
+h1, h2, h3, h4, h5, p, ul, ol, li, blockquote, hr {
+  margin-top: 0; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003137}}
+h1, .h1 {
+  font-size: 2.2em;
+  text-align: center;
+  margin: 0 0 0.685em 0;
+  line-height: 1.37em;
+  font-family: sans-serif;
+  opacity: 0.99; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003146}}
+h2, .h2 {
+  font-size: 1.45em;
+  margin-bottom: 1.04em; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003151}}
+h3, .h3 {
+  font-size: 1.15em;
+  margin-bottom: 1.3em; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003156}}
+h4, .h4 {
+  font-size: 1em;
+  margin-bottom: 0.75em; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003161}}
+h5, .h5 {
+  font-size: .9em;
+  margin-bottom: 0; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003166}}
+p, li {
+  font-family: "Georgia", Cambria, Times New Roman, Times, serif;
+  font-size: 1em;
+  margin-bottom: 1.5em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003171}}
+  p a, li a {
+    font-weight: bold; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003176}}
+p.meta {
+  font-size: 0.7em; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003180}}
+li {
+  margin-right: 3em; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003184}}
+blockquote {
+  margin-bottom: 1.5em; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003188}}
+.content {
+  padding-bottom: 0.5em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003190}}
+  .content img {
+    width: 100%;
+    margin-bottom: 1.5em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003195}}
+  .content > p:first-of-type {
+    font-style: italic;
+    font-size: 1.25em;
+    margin-bottom: 1.2em; }
+
+/*********************
+HEADER STYLES
+*********************/
+/*********************
+LOGO STYLES
+*********************/
+/*********************
+NAVIGATION STYLES
+*********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003217}}
+nav {
+  background: #ff5555;
+  margin-bottom: 1.5em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003221}}
+  nav.horiz ul {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003226}}
+    nav.horiz ul li {
+      display: inline-block;
+      margin: 0;
+      padding: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003230}}
+      nav.horiz ul li a {
+        display: block;
+        color: white;
+        padding: 0.91em;
+        font-size: .84em; }
+
+/*********************
+SIDEBARS & ASIDES
+*********************/
+/*********************
+IMAGES
+*********************/
+/*********************
+FOOTER STYLES
+*********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003254}}
+footer {
+  background: #ff5555;
+  color: #fbfbfa;
+  overflow: hidden;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003264}}
+  footer p.meta {
+    margin-bottom: 2.15em; }
+
+/*********************
+TRANSITIONS & ANIMATIONS
+*********************/
+/**************
+BACKGROUNDS
+****************/
+/*********************
+BUTTONS
+*********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003284}}
+.button, .button:visited {
+  padding: 0.76em 0.8em;
+  display: inline-block;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  background: #ff5555;
+  color: white; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_base\.scss}line{font-family:\00003295}}
+  .button:hover, .button:focus, .button:visited:hover, .button:visited:focus {
+    background: #ff7e7e;
+    color: white; }
+
+/*
+LARGER MOBILE DEVICES
+This is for devices like the Galaxy Note or something that's
+larger than an iPhone but smaller than a tablet. Let's call them
+tweeners.
+*/
+@media only screen and (min-width: 30em) {
+  /******************************************************************
+  Site Name: 
+  Author: 
+  
+  Stylesheet: 
+  
+  ******************************************************************/
+  /*********************
+  GENERAL STYLES
+  *********************/
+  /*********************
+  LAYOUT & GRID STYLES
+  *********************/
+  /*********************
+  TYPE
+  *********************/
+  /*********************
+  HEADER STYLES
+  *********************/
+  /*********************
+  LOGO STYLES
+  *********************/
+  /*********************
+  NAVIGATION STYLES
+  *********************/
+  /*********************
+  SIDEBARS & ASIDES
+  *********************/
+  /*********************
+  FOOTER STYLES
+  *********************/
+  /*********************
+  TRANSITIONS
+  *********************/ }
+@media only screen and (min-width: 35.5em) {
+  /******************************************************************
+  Site Name: 
+  Author: 
+  
+  Stylesheet: 
+  
+  ******************************************************************/
+  /*********************
+  GENERAL STYLES
+  *********************/
+  /*********************
+  LAYOUT & GRID STYLES
+  *********************/
+  /*********************
+  TYPE
+  *********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_568up\.scss}line{font-family:\0000324}}
+  body {
+    font-size: 18px; }
+
+  /*********************
+  HEADER STYLES
+  *********************/
+  /*********************
+  LOGO STYLES
+  *********************/
+  /*********************
+  NAVIGATION STYLES
+  *********************/
+  /*********************
+  SIDEBARS & ASIDES
+  *********************/
+  /*********************
+  FOOTER STYLES
+  *********************/
+  /*********************
+  TRANSITIONS
+  *********************/ }
+@media only screen and (min-width: 41.75em) {
+  /******************************************************************
+  Site Name: 
+  Author: 
+  
+  Stylesheet: 
+  
+  ******************************************************************/
+  /*********************
+  GENERAL STYLES
+  *********************/
+  /*********************
+  LAYOUT & GRID STYLES
+  *********************/
+  /*********************
+  TYPE
+  *********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_668up\.scss}line{font-family:\0000325}}
+  body {
+    font-size: 20px; }
+
+  /*********************
+  HEADER STYLES
+  *********************/
+  /*********************
+  LOGO STYLES
+  *********************/
+  /*********************
+  NAVIGATION STYLES
+  *********************/
+  /*********************
+  SIDEBARS & ASIDES
+  *********************/
+  /*********************
+  FOOTER STYLES
+  *********************/
+  /*********************
+  TRANSITIONS
+  *********************/ }
+/*
+TABLET & SMALLER LAPTOPS
+This is the average viewing window. So Desktops, Laptops, and
+in general anyone not viewing on a mobile device. Here's where
+you can add resource intensive styles.
+*/
+@media only screen and (min-width: 48em) {
+  /******************************************************************
+  Site Name: 
+  Author: 
+  
+  Stylesheet: 
+  
+  ******************************************************************/
+  /*********************
+  GENERAL STYLES
+  *********************/
+  /*********************
+  LAYOUT & GRID STYLES
+  *********************/
+  /*********************
+  TYPE
+  *********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_768up\.scss}line{font-family:\0000324}}
+  body {
+    font-size: 22px; }
+
+  /*********************
+  HEADER STYLES
+  *********************/
+  /*********************
+  LOGO STYLES
+  *********************/
+  /*********************
+  NAVIGATION STYLES
+  *********************/
+  /*********************
+  SIDEBARS & ASIDES
+  *********************/
+  /*********************
+  FOOTER STYLES
+  *********************/
+  /*********************
+  TRANSITIONS
+  *********************/ }
+/*
+DESKTOP
+This is the average viewing window. So Desktops, Laptops, and
+in general anyone not viewing on a mobile device. Here's where
+you can add resource intensive styles.
+*/
+@media only screen and (min-width: 64em) {
+  /******************************************************************
+  Site Name: 
+  Author: 
+  
+  Stylesheet: 
+  
+  ******************************************************************/
+  /*********************
+  GENERAL STYLES
+  *********************/
+  /*********************
+  LAYOUT & GRID STYLES
+  *********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_1024up\.scss}line{font-family:\0000320}}
+  .wrap.up1024 {
+    padding-left: 4%;
+    padding-right: 4%; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_1024up\.scss}line{font-family:\0000327}}
+  .w66 {
+    width: 62.6%;
+    float: left; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_1024up\.scss}line{font-family:\0000332}}
+  .w33 {
+    width: 33.3%;
+    float: right; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_1024up\.scss}line{font-family:\0000337}}
+  .logo {
+    float: left; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_1024up\.scss}line{font-family:\0000341}}
+  nav {
+    float: right; }
+
+  /*********************
+  TYPE
+  *********************/
+  /*********************
+  HEADER STYLES
+  *********************/
+  /*********************
+  LOGO STYLES
+  *********************/
+  /*********************
+  NAVIGATION STYLES
+  *********************/
+  /*********************
+  SIDEBARS & ASIDES
+  *********************/
+  /*********************
+  FOOTER STYLES
+  *********************/
+  /*********************
+  TRANSITIONS
+  *********************/ }
+/*
+LARGE VIEWING SIZE
+This is for the larger monitors and possibly full screen viewers.
+*/
+@media only screen and (min-width: 77.5em) {
+  /******************************************************************
+  Site Name: 
+  Author: 
+  
+  Stylesheet: 
+  
+  ******************************************************************/
+  /*********************
+  GENERAL STYLES
+  *********************/
+  /*********************
+  LAYOUT & GRID STYLES
+  *********************/
+  /*********************
+  TYPE
+  *********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_1240up\.scss}line{font-family:\0000325}}
+  body {
+    font-size: 24px; }
+
+  /*********************
+  HEADER STYLES
+  *********************/
+  /*********************
+  LOGO STYLES
+  *********************/
+  /*********************
+  NAVIGATION STYLES
+  *********************/
+  /*********************
+  SIDEBARS & ASIDES
+  *********************/
+  /*********************
+  FOOTER STYLES
+  *********************/
+  /*********************
+  TRANSITIONS
+  *********************/ }
+@media only screen and (min-width: 85.75em) {
+  /******************************************************************
+  Site Name: 
+  Author: 
+  
+  Stylesheet: 
+  
+  ******************************************************************/
+  /*********************
+  GENERAL STYLES
+  *********************/
+  /*********************
+  LAYOUT & GRID STYLES
+  *********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_1372up\.scss}line{font-family:\0000319}}
+  .wrap, .wrap.up1024 {
+    width: 1262px;
+    padding-left: 0;
+    padding-right: 0; }
+
+  /*********************
+  TYPE
+  *********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_1372up\.scss}line{font-family:\0000329}}
+  body {
+    font-size: 26px; }
+
+  /*********************
+  HEADER STYLES
+  *********************/
+  /*********************
+  LOGO STYLES
+  *********************/
+  /*********************
+  NAVIGATION STYLES
+  *********************/
+  /*********************
+  SIDEBARS & ASIDES
+  *********************/
+  /*********************
+  FOOTER STYLES
+  *********************/
+  /*********************
+  TRANSITIONS
+  *********************/ }
+@media only screen and (min-width: 97.5em) {
+  /******************************************************************
+  Site Name: 
+  Author: 
+  
+  Stylesheet: 
+  
+  ******************************************************************/
+  /*********************
+  GENERAL STYLES
+  *********************/
+  /*********************
+  LAYOUT & GRID STYLES
+  *********************/
+  /*********************
+  TYPE
+  *********************/
+  /*********************
+  HEADER STYLES
+  *********************/
+  /*********************
+  LOGO STYLES
+  *********************/
+  /*********************
+  NAVIGATION STYLES
+  *********************/
+  /*********************
+  SIDEBARS & ASIDES
+  *********************/
+  /*********************
+  FOOTER STYLES
+  *********************/
+  /*********************
+  TRANSITIONS
+  *********************/ }
+@media only screen and (min-width: 132em) {
+  /******************************************************************
+  Site Name: 
+  Author: 
+  
+  Stylesheet: 
+  
+  ******************************************************************/
+  /*********************
+  GENERAL STYLES
+  *********************/
+  /*********************
+  LAYOUT & GRID STYLES
+  *********************/
+  /*********************
+  TYPE
+  *********************/
+  /*********************
+  HEADER STYLES
+  *********************/
+  /*********************
+  LOGO STYLES
+  *********************/
+  /*********************
+  NAVIGATION STYLES
+  *********************/
+  /*********************
+  SIDEBARS & ASIDES
+  *********************/
+  /*********************
+  FOOTER STYLES
+  *********************/
+  /*********************
+  TRANSITIONS
+  *********************/ }
+/*
+RETINA (2x RESOLUTION DEVICES)
+This applies to the retina iPhone (4s) and iPad (2,3) along with
+other displays with a 2x resolution. You can also create a media
+query for retina AND a certain size if you want. Go Nuts.
+*/
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
+  /******************************************************************
+  Site Name: 
+  Author: 
+  
+  Stylesheet: Retina Screens & Devices Stylesheet
+  
+  When handling retina screens you need to make adjustments, especially
+  if you're not using font icons. Here you can add them in one neat
+  place.
+  
+  ******************************************************************/
+  /* 
+  
+  EXAMPLE 
+  Let's say you have an image and you need to make sure it looks ok
+  on retina screens. Let's say we have an icon which dimension are
+  24px x 24px. In your regular stylesheets, it would look something
+  like this:
+  
+  .icon {
+  	width: 24px;
+  	height: 24px;
+  	background: url(img/test.png) no-repeat;
+  }
+  
+  For retina screens, we have to make some adjustments, so that image
+  doesn't look blurry. So, taking into account the image above and the
+  dimensions, this is what we would put in our retina stylesheet:
+  
+  .icon {
+  	background: url(img/test@2x.png) no-repeat;
+  	background-size: 24px 24px;
+  }
+  
+  So, you would create the same icon, but at double the resolution, meaning 
+  it would be 48px x 48px. You'd name it the same, but with a @2x at the end
+  (this is pretty standard practice). Set the background image so it matches
+  the original dimensions and you are good to go. 
+  
+  */ }
+/*
+PRINT STYLESHEET
+Feel free to customize this. Remember to add things that won't make
+sense to print at the bottom. Things like nav, ads, and forms should
+be set to display none.
+*/
+@media print {
+  /******************************************************************
+  Site Name:
+  Author:
+  
+  Stylesheet: Print Stylesheet
+  
+  This is the print stylesheet. There's probably not a lot
+  of reasons to edit this stylesheet. If you want to
+  though, go for it.
+  
+  ******************************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_print\.scss}line{font-family:\0000315}}
+  * {
+    background: transparent !important;
+    color: black !important;
+    text-shadow: none !important;
+    filter: none !important;
+    -ms-filter: none !important; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_print\.scss}line{font-family:\0000323}}
+  a, a:visited {
+    color: #444444 !important;
+    text-decoration: underline; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_print\.scss}line{font-family:\0000328}}
+    a:after, a:visited:after {
+      content: " (" attr(href) ")"; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_print\.scss}line{font-family:\0000333}}
+    a abbr[title]:after, a:visited abbr[title]:after {
+      content: " (" attr(title) ")"; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_print\.scss}line{font-family:\0000340}}
+  .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: ""; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_print\.scss}line{font-family:\0000344}}
+  pre, blockquote {
+    border: 1px solid #999999;
+    page-break-inside: avoid; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_print\.scss}line{font-family:\0000349}}
+  thead {
+    display: table-header-group; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_print\.scss}line{font-family:\0000353}}
+  tr, img {
+    page-break-inside: avoid; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_print\.scss}line{font-family:\0000357}}
+  img {
+    max-width: 100% !important; }
+
+  @page {
+    margin: 0.5cm; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_print\.scss}line{font-family:\0000365}}
+  p, h2, h3 {
+    orphans: 3;
+    widows: 3; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_print\.scss}line{font-family:\0000371}}
+  h2,
+  h3 {
+    page-break-after: avoid; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_print\.scss}line{font-family:\0000380}}
+  .sidebar,
+  .page-navigation,
+  .wp-prev-next,
+  .respond-form,
+  nav {
+    display: none; } }
+/* ==========================================================================
+   Modernizr
+   ========================================================================== */
+/*
+DIAGNOSTIC						////////////////////////////////////////don't forget to comment this in production!
+*/
+/*********************
+small rubbish diagnostic reset
+*********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\000036}}
+#SFLDiagnostic h1, #SFLDiagnostic h2, #SFLDiagnostic .h1, #SFLDiagnostic p {
+  background: none; }
+
+/*********************
+DIAGNOSTIC
+*********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\0000320}}
+#SFLDiagnostic.overlay {
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  opacity: 0;
+  visibility: hidden;
+  width: 100%;
+  height: 180%;
+  position: fixed;
+  top: 0;
+  -webkit-transition-property: opacity,visibility;
+  -webkit-transition-duration: 0.5s,0.5s; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\0000332}}
+  #SFLDiagnostic.overlay h2 {
+    float: right; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\0000336}}
+  #SFLDiagnostic.overlay .button {
+    float: right;
+    clear: both;
+    margin-bottom: 1em; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\0000343}}
+.consoleContainer {
+  position: fixed;
+  bottom: 0;
+  height: 5em;
+  width: 100%;
+  color: white;
+  background: rgba(0, 0, 0, 0.75);
+  overflow: hidden;
+  display: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\0000353}}
+  .consoleContainer.animate {
+    display: block;
+    opacity: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\0000358}}
+  .consoleContainer #console {
+    position: absolute;
+    bottom: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\0000362}}
+    .consoleContainer #console p {
+      font-family: monaco, "lucida console", monospace;
+      line-height: 1;
+      margin: 0; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\0000371}}
+.diagBox {
+  display: block;
+  padding: 0.1em 1em 0.1em 0.5em;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  position: fixed;
+  bottom: 10px;
+  right: 0;
+  z-index: 99999;
+  font-size: .7em;
+  opacity: 0.6;
+  -webkit-transition-property: opacity;
+  -webkit-transition-duration: 0.07s; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\0000385}}
+  .diagBox:hover {
+    opacity: 1; }
+
+/*********************
+TRANSITIONS & ANIMATIONS
+*********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\0000395}}
+#SFLDiagnostic.overlay.animate {
+  opacity: 1;
+  visibility: visible; }
+
+/*********************
+BACKGROUND GRIDS
+*********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\00003104}}
+.ruler body {
+  background-image: url("../img/diagnostic/BGResponsiveScaffold.png"); }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\00003108}}
+.ruler.verticalGuides body {
+  background-image: url("../img/diagnostic/BGVRhythm320.png"), url("../img/diagnostic/BGResponsiveScaffold.png"); }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\00003112}}
+.verticalGuides body {
+  background-image: url("../img/diagnostic/BGVRhythm320.png"); }
+
+/*********************
+COLOURED BLOCK ELEMENTS
+*********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\00003129}}
+.typeBg h1, .typeBg h2, .typeBg h3, .typeBg h4, .typeBg h5, .typeBg p, .typeBg ul, .typeBg ol, .typeBg li, .typeBg blockquote {
+  background: rgba(0, 0, 255, 0.075); }
+
+@media only screen and (min-width: 35.5em) {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\00003139}}
+  .ruler.verticalGuides body {
+    background-image: url("../img/diagnostic/BGVRhythm568.png"), url("../img/diagnostic/BGResponsiveScaffold.png"); }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\00003143}}
+  .verticalGuides body {
+    background-image: url("../img/diagnostic/BGVRhythm568.png"); } }
+@media only screen and (min-width: 41.75em) {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\00003149}}
+  .ruler.verticalGuides body {
+    background-image: url("../img/diagnostic/BGVRhythm668.png"), url("../img/diagnostic/BGResponsiveScaffold.png"); }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\00003153}}
+  .verticalGuides body {
+    background-image: url("../img/diagnostic/BGVRhythm668.png"); } }
+@media only screen and (min-width: 48em) {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\00003159}}
+  .ruler.verticalGuides body {
+    background-image: url("../img/diagnostic/BGVRhythm768.png"), url("../img/diagnostic/BGResponsiveScaffold.png"); }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\00003163}}
+  .verticalGuides body {
+    background-image: url("../img/diagnostic/BGVRhythm768.png"); } }
+@media only screen and (min-width: 77.5em) {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\00003169}}
+  .ruler.verticalGuides body {
+    background-image: url("../img/diagnostic/BGVRhythm1240.png"), url("../img/diagnostic/BGResponsiveScaffold.png"); }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\00003173}}
+  .verticalGuides body {
+    background-image: url("../img/diagnostic/BGVRhythm1240.png"); } }
+@media only screen and (min-width: 85.75em) {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\00003179}}
+  .ruler.verticalGuides body {
+    background-image: url("../img/diagnostic/BGVRhythm1372.png"), url("../img/diagnostic/BGResponsiveScaffold.png"); }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\00003183}}
+  .verticalGuides body {
+    background-image: url("../img/diagnostic/BGVRhythm1372.png"); } }
