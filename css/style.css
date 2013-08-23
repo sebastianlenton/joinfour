@@ -1552,3 +1552,12 @@ COLOURED BLOCK ELEMENTS
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/boilerplates\/static\/scss\/_diagnostic\.scss}line{font-family:\00003183}}
   .verticalGuides body {
     background-image: url("../img/diagnostic/BGVRhythm1372.png"); } }
+
+body {
+	overflow:hidden;
+}
+
+.board {
+	background:pink;
+	margin:0 auto;
+}
