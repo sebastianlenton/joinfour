@@ -698,7 +698,7 @@ body {
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\0000373}}
 .board {
-  background: pink;
+  background: lightBlue;
   margin: 0 auto;
   position: relative; }
 
@@ -710,7 +710,7 @@ body {
   z-index: 100; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\0000385}}
   .clickZone:nth-of-type(2n) {
-    background: rgba(0, 0, 0, 0.1); }
+    background: rgba(255, 255, 255, 0.1); }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\0000390}}
 .chip {
