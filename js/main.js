@@ -62,7 +62,7 @@ var Game = function() {
 					accumulator += 1;
 				}
 			}
-			if( accumulator == 4 ) {
+			if( accumulator == this.numberToConnect ) {
 				console.log( colour + ' wins (horiz)!' );
 			}
 		}
@@ -74,7 +74,7 @@ var Game = function() {
 					accumulator += 1;
 				}
 			}
-			if( accumulator == 4 ) {
+			if( accumulator == this.numberToConnect ) {
 				console.log( colour + ' wins (vert)!' );
 			}
 		}
@@ -86,11 +86,9 @@ var Game = function() {
 	this.getEmpty = function( zone, board ) {
 		for( var y = board.heightBlocks - 1 ; y >= 0; y-- ) {
 			if( this.gameState[ zone ][ y ] == 0 ) {
-				//console.log( 'return int ' + y );
 				return y;
 			}
 		}
-		console.log( 'return false' );
 		return false;
 	}
 }
@@ -182,7 +180,6 @@ var game = new Game();
 
 game.initGameState( board );
 board.createBoard();
-//console.log( board.gameState );
 
 function mainLoop() {
 	//too much redrawing is happening
