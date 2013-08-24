@@ -66,6 +66,32 @@ LAYOUT & GRID STYLES
 *********************/
 
 
+body {
+	overflow:hidden;
+}
+
+.board {
+	background:pink;
+	margin:0 auto;
+	position:relative;
+}
+
+.clickZone {
+	display:block;
+	float:right;
+	position:relative;
+	z-index:100;
+	
+	&:nth-of-type( 2n ) {
+		background:rgba( 0, 0, 0, 0.1 );
+	}
+}
+
+.chip {
+	position:absolute;
+	z-index:0;
+}
+
 /*********************
 LINK STYLES
 *********************/
