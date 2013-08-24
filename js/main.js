@@ -3,7 +3,6 @@
 var Game = function() {
 	this.turn = 0;
 	this.drawClickZones = function( board ) {
-		//console.log( 'draw click zones' );
 		for( var i = 0; i < board.widthBlocks; i++ ) {
 			$( '.board' ).prepend( '<a href="#" class="clickZone" id="cz' + i + '" data-id="' + i + '"	></a>' );
 			$( '#cz' + i ).css({
@@ -38,6 +37,10 @@ var Board = function( ) {
 		}
 		
 		this.gameState = tempArray;
+	}
+	
+	this.createBoard = function() {
+		$( 'body' ).append( '<div class="board"></div>' );
 	}
 	
 	this.calculateDimensions = function( viewport ) {
@@ -112,8 +115,8 @@ function getViewport() {
 var board = new Board();
 var game = new Game();
 
-$( 'body' ).append( '<div class="board"></div>' );
 board.initGameState();
+board.createBoard();
 console.log( board.gameState );
 
 function mainLoop() {
