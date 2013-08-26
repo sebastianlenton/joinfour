@@ -39,7 +39,23 @@ var Game = function() {
 				tempArray[ x ][ y ] = 0;
 			}
 		}
+		
 		this.gameState = tempArray;
+		/*this.gameState =
+		[ [ 0, 0, 0, 0, 0, 0 ],
+		[ 0, 0, 0, 0, 0, 0 ],
+		[ 0, 0, 0, 0, 0, 0 ],
+		[ 0, 0, 0, 0, 0, 0 ],
+		[ 0, 0, 0, 0, 0, 0 ],
+		[ 0, 0, 0, 0, 0, 0 ],
+		[ 0, 0, 0, 0, 0, 0 ] ];*/
+		
+		/*this.gameState = [ [ 0, 0, 0, 0, 0, 0, 0],
+		[ 0, 0, 0, 0, 0, 0, 0],
+		[ 0, 0, 0, 0, 0, 0, 0],
+		[ 0, 0, 0, 0, 0, 0, 0],
+		[ 0, 0, 0, 0, 0, 0, 0],
+		[ 'red', 'red', 'red', 'red', 0, 0, 0] ];*/
 	}
 	
 	this.addChip = function( zone, board ) {
@@ -54,8 +70,121 @@ var Game = function() {
 	}
 	
 	this.checkForWin = function( chipX, chipY, board, colour ) {
+		//to check for a line you need to check from x - ( numberToConnect - 1 ) to ( x + numberToconnect - 1 )
+		//this is all a bit whack
+		
+		//checkHoriz
+		var startPoint = chipX - ( this.numberToConnect - 1 ),
+		endPoint = chipX + ( this.numberToConnect - 1 );
+		
+		if( startPoint < 0 ) {
+			startPoint = 0;
+		}
+		
+		if( endPoint > board.widthBlocks - 1 ) {
+			endPoint = board.widthBlocks - 1;
+		}
+		
+		var accumulator = 0;
+		var output = 0;
+		
+		for( var s = startPoint; s <= endPoint; s++ ) {
+			//console.log( 'checking' + s + ' ' + chipY );
+
+			if( this.gameState[ s ][ chipY ] == colour ) {
+				accumulator++;
+				if( accumulator > output ) {
+					output = accumulator;
+				}
+			} else {
+				if( accumulator > output ) {
+					output = accumulator;
+				}
+				accumulator = 0;
+			}
+		}
+		
+		//vert
+		accumulator = 0;
+		startPoint = chipY - ( this.numberToConnect - 1 ),
+		endPoint = chipY + ( this.numberToConnect - 1 );
+		
+		if( startPoint < 0 ) {
+			startPoint = 0;
+		}
+		
+		if( endPoint > board.heightBlocks - 1 ) {
+			endPoint = board.heightBlocks - 1;
+		}
+		
+		for( var s = startPoint; s <= endPoint; s++ ) {
+			if( this.gameState[ chipX ][ s ] == colour ) {
+				accumulator++;
+				if( accumulator > output ) {
+					output = accumulator;
+				}
+			} else {
+				if( accumulator > output ) {
+					output = accumulator;
+				}
+				accumulator = 0;
+			}
+		}
+		
+		//diag top left - bottom right
+		accumulator = 0;
+		var startPointX = chipX - ( this.numberToConnect - 1 ),
+		startPointY = chipY - ( this.numberToConnect - 1 ),
+		endPointX = chipX + ( this.numberToConnect - 1 ),
+		endPointY = chipY + ( this.numberToConnect - 1 );
+		
+		if( startPointX < 0 ) {
+			startPointX = 0;
+			startPointY = chipY - chipX;
+		}
+		
+		if( startPointY < 0 ) {
+			startPointY = 0;
+			startPointX = chipX - chipY;
+		}
+		
+		if( endPointX > board.widthBlocks - 1 ) {
+			endPointX = board.widthBlocks - 1;
+			endPointY = chipY + board.widthBlocks - chipX - 1;
+		}
+		
+		if( endPointY > board.heightBlocks - 1 ) {
+			endPointY = board.heightBlocks - 1;
+			endPointX = chipX + board.heightBlocks - chipY - 1;
+		}
+		
+		console.log( 'startpoint: [' + startPointX + ', ' + startPointY + ']'  );
+		console.log( 'endpoint: [' + endPointX + ', ' + endPointY + ']'  );
+		
+		console.log( 'length: ' +  ( endPointX - startPointX + 1 ) );
+		
+		var loopLength = endPointX - startPointX + 1;
+		
+		for( var s = 0; s < loopLength; s++ ) {
+			//console.log( 'checking' + s + ' ' + chipY );
+
+			if( this.gameState[ startPointX + s ][ startPointY + s ] == colour ) {
+				accumulator++;
+				if( accumulator > output ) {
+					output = accumulator;
+				}
+			} else {
+				if( accumulator > output ) {
+					output = accumulator;
+				}
+				accumulator = 0;
+			}
+		}
+		
+		console.log( 'line detected of ' + output );
+	
 		//check horiz
-		for( var q = 0; q <= board.widthBlocks - this.numberToConnect; q++ ) {
+		/*for( var q = 0; q <= board.widthBlocks - this.numberToConnect; q++ ) {
 			var accumulator = 0;
 			for( var k = 0; k < this.numberToConnect; k++ ) {
 				if( this.gameState[ k + q ][ chipY ] == colour ) {
@@ -65,9 +194,10 @@ var Game = function() {
 			if( accumulator == this.numberToConnect ) {
 				console.log( colour + ' wins (horiz)!' );
 			}
-		}
+		}*/
+		
 		//check vert
-		for( var q = 0; q <= board.heightBlocks - this.numberToConnect; q++ ) {
+		/*for( var q = 0; q <= board.heightBlocks - this.numberToConnect; q++ ) {
 			var accumulator = 0;
 			for( var k = 0; k < this.numberToConnect; k++ ) {
 				if( this.gameState[ chipX ][ k + q ] == colour ) {
@@ -78,9 +208,33 @@ var Game = function() {
 				console.log( colour + ' wins (vert)!' );
 			}
 		}
-		//check diag (top left - bottom right)
+		
+		console.log( chipX - chipY );*/
 		
 		//check diag (bottom left - top right)
+		//note, if you set game.numberToConnect to greater than the height of the board, it should say 'dont bother' for everything - but it doesn't?
+		
+		
+		/*if( ( chipX + chipY ) < ( this.numberToConnect - 1 ) || ( chipX + chipY ) > ( board.widthBlocks - 1 ) ) {		//first, check whether worth doing or not
+			//console.log( 'dont bother ( bl - tr)' );
+		} else {
+			var startX = board.widthBlocks - ( board.widthBlocks - chipX );
+			var startY = board.heightBlocks - ( board.heightBlocks - chipY );
+			
+			//console.log( 'CHECK HERE' );
+		}
+		
+		//check diag (top left - bottom right)
+		if( ( chipX - chipY ) < 0 || ( chipX - chipY > board.widthBlocks - this.numberToConnect ) ) {		//first, check whether worth doing or not
+//			console.log( board.widthBlocks - this.numberToConnect );
+		
+			console.log( 'dont bother ( tl - br)' );
+		} else {
+			var startX = board.widthBlocks - ( board.widthBlocks - chipX );
+			var startY = board.heightBlocks - ( board.heightBlocks - chipY );
+			
+			//console.log( 'CHECK HERE ( bl - tr)' );
+		}*/
 	}
 	
 	this.getEmpty = function( zone, board ) {
@@ -94,8 +248,8 @@ var Game = function() {
 }
 
 var Board = function( ) {
-	this.widthBlocks = 7;
-	this.heightBlocks = 6;
+	this.widthBlocks = 8;
+	this.heightBlocks = 8;
 	this.blockWidth;
 	this.widthPx;
 	this.heightPx;
@@ -136,6 +290,7 @@ var Board = function( ) {
 	this.drawGame = function( game ) {
 		for( var x = 0; x < this.widthBlocks; x++ ) {
 			for( var y = 0; y < this.heightBlocks; y++ ) {
+				//console.log( 'draw' + x + ' ' + y );
 				if( game.gameState[ x ][ y ] != 0 ) {
 					$( '.board' ).prepend( '<div class="chip" id="game' + x + y + '"></div>' );
 					
