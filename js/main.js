@@ -199,17 +199,10 @@ var Game = function() {
 			endPointY = chipY - ( endPointX - chipX  );
 		}
 		
-		
-		
 		if( endPointY < 0 ) {
 			endPointY = 0;
 			endPointX = chipX - ( endPointY - chipY  );
 		}
-		
-		/*if( endPointY > board.heightBlocks - 1 ) {
-			endPointY = board.heightBlocks - 1;
-			endPointX = chipX + board.heightBlocks - chipY - 1;
-		}*/
 		
 		console.log( 'startpoint: [' + startPointX + ', ' + startPointY + ']'  );
 		console.log( 'endpoint: [' + endPointX + ', ' + endPointY + ']'  );
@@ -218,8 +211,8 @@ var Game = function() {
 		
 		var loopLength = endPointX - startPointX + 1;
 		
-		/*for( var s = 0; s < loopLength; s++ ) {
-			if( this.gameState[ startPointX + s ][ startPointY + s ] == colour ) {
+		for( var s = 0; s < loopLength; s++ ) {
+			if( this.gameState[ startPointX + s ][ startPointY - s ] == colour ) {
 				accumulator++;
 				if( accumulator > output ) {
 					output = accumulator;
@@ -230,7 +223,7 @@ var Game = function() {
 				}
 				accumulator = 0;
 			}
-		}*/
+		}
 		
 		console.log( 'line detected of ' + output );
 	}
@@ -246,8 +239,8 @@ var Game = function() {
 }
 
 var Board = function( ) {
-	this.widthBlocks = 6;
-	this.heightBlocks = 6;
+	this.widthBlocks = 8;
+	this.heightBlocks = 8;
 	this.blockWidth;
 	this.widthPx;
 	this.heightPx;
