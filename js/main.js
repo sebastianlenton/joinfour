@@ -89,8 +89,6 @@ var Game = function() {
 		var output = 0;
 		
 		for( var s = startPoint; s <= endPoint; s++ ) {
-			//console.log( 'checking' + s + ' ' + chipY );
-
 			if( this.gameState[ s ][ chipY ] == colour ) {
 				accumulator++;
 				if( accumulator > output ) {
@@ -158,16 +156,14 @@ var Game = function() {
 			endPointX = chipX + board.heightBlocks - chipY - 1;
 		}
 		
-		console.log( 'startpoint: [' + startPointX + ', ' + startPointY + ']'  );
+		/*console.log( 'startpoint: [' + startPointX + ', ' + startPointY + ']'  );
 		console.log( 'endpoint: [' + endPointX + ', ' + endPointY + ']'  );
 		
-		console.log( 'length: ' +  ( endPointX - startPointX + 1 ) );
+		console.log( 'length: ' +  ( endPointX - startPointX + 1 ) );*/
 		
 		var loopLength = endPointX - startPointX + 1;
 		
 		for( var s = 0; s < loopLength; s++ ) {
-			//console.log( 'checking' + s + ' ' + chipY );
-
 			if( this.gameState[ startPointX + s ][ startPointY + s ] == colour ) {
 				accumulator++;
 				if( accumulator > output ) {
@@ -181,60 +177,62 @@ var Game = function() {
 			}
 		}
 		
+		//diag bottom left - top right
+		accumulator = 0;
+		startPointX = chipX - ( this.numberToConnect - 1 ),
+		startPointY = chipY + ( this.numberToConnect - 1 ),
+		endPointX = chipX + ( this.numberToConnect - 1 ),
+		endPointY = chipY - ( this.numberToConnect - 1 );
+		
+		if( startPointX < 0 ) {
+			startPointX = 0;
+			startPointY = chipY + chipX;
+		}
+		
+		if( startPointY > board.heightBlocks - 1 ) {
+			startPointY = board.heightBlocks - 1;
+			startPointX = chipX - ( startPointY - chipY  );//chipX - chipY;
+		}
+		
+		if( endPointX > board.widthBlocks - 1 ) {
+			endPointX = board.widthBlocks - 1;
+			endPointY = chipY - ( endPointX - chipX  );
+		}
+		
+		
+		
+		if( endPointY < 0 ) {
+			endPointY = 0;
+			endPointX = chipX - ( endPointY - chipY  );
+		}
+		
+		/*if( endPointY > board.heightBlocks - 1 ) {
+			endPointY = board.heightBlocks - 1;
+			endPointX = chipX + board.heightBlocks - chipY - 1;
+		}*/
+		
+		console.log( 'startpoint: [' + startPointX + ', ' + startPointY + ']'  );
+		console.log( 'endpoint: [' + endPointX + ', ' + endPointY + ']'  );
+		
+		console.log( 'length: ' +  ( endPointX - startPointX + 1 ) );
+		
+		var loopLength = endPointX - startPointX + 1;
+		
+		/*for( var s = 0; s < loopLength; s++ ) {
+			if( this.gameState[ startPointX + s ][ startPointY + s ] == colour ) {
+				accumulator++;
+				if( accumulator > output ) {
+					output = accumulator;
+				}
+			} else {
+				if( accumulator > output ) {
+					output = accumulator;
+				}
+				accumulator = 0;
+			}
+		}*/
+		
 		console.log( 'line detected of ' + output );
-	
-		//check horiz
-		/*for( var q = 0; q <= board.widthBlocks - this.numberToConnect; q++ ) {
-			var accumulator = 0;
-			for( var k = 0; k < this.numberToConnect; k++ ) {
-				if( this.gameState[ k + q ][ chipY ] == colour ) {
-					accumulator += 1;
-				}
-			}
-			if( accumulator == this.numberToConnect ) {
-				console.log( colour + ' wins (horiz)!' );
-			}
-		}*/
-		
-		//check vert
-		/*for( var q = 0; q <= board.heightBlocks - this.numberToConnect; q++ ) {
-			var accumulator = 0;
-			for( var k = 0; k < this.numberToConnect; k++ ) {
-				if( this.gameState[ chipX ][ k + q ] == colour ) {
-					accumulator += 1;
-				}
-			}
-			if( accumulator == this.numberToConnect ) {
-				console.log( colour + ' wins (vert)!' );
-			}
-		}
-		
-		console.log( chipX - chipY );*/
-		
-		//check diag (bottom left - top right)
-		//note, if you set game.numberToConnect to greater than the height of the board, it should say 'dont bother' for everything - but it doesn't?
-		
-		
-		/*if( ( chipX + chipY ) < ( this.numberToConnect - 1 ) || ( chipX + chipY ) > ( board.widthBlocks - 1 ) ) {		//first, check whether worth doing or not
-			//console.log( 'dont bother ( bl - tr)' );
-		} else {
-			var startX = board.widthBlocks - ( board.widthBlocks - chipX );
-			var startY = board.heightBlocks - ( board.heightBlocks - chipY );
-			
-			//console.log( 'CHECK HERE' );
-		}
-		
-		//check diag (top left - bottom right)
-		if( ( chipX - chipY ) < 0 || ( chipX - chipY > board.widthBlocks - this.numberToConnect ) ) {		//first, check whether worth doing or not
-//			console.log( board.widthBlocks - this.numberToConnect );
-		
-			console.log( 'dont bother ( tl - br)' );
-		} else {
-			var startX = board.widthBlocks - ( board.widthBlocks - chipX );
-			var startY = board.heightBlocks - ( board.heightBlocks - chipY );
-			
-			//console.log( 'CHECK HERE ( bl - tr)' );
-		}*/
 	}
 	
 	this.getEmpty = function( zone, board ) {
@@ -248,8 +246,8 @@ var Game = function() {
 }
 
 var Board = function( ) {
-	this.widthBlocks = 8;
-	this.heightBlocks = 8;
+	this.widthBlocks = 6;
+	this.heightBlocks = 6;
 	this.blockWidth;
 	this.widthPx;
 	this.heightPx;
@@ -312,14 +310,6 @@ var Player = function( colour, isComputer ) {
 	this.colour = colour;
 	this.isComputer = isComputer;
 }
-
-//checks for win condition
-	
-//chip
-//dimensions ( got from board )
-//
-
-
 
 function getViewport() {
 	var viewport = {
