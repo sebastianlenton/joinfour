@@ -4,7 +4,7 @@ var Game = function() {
 	this.numberToConnect = 4;																	//so you could do connect X instead if you want
 	this.turn = 0;
 	this.gameState = [];
-	this.players = [ new Player( 'red', false ), new Player( 'yellow', false ) ];
+	this.players = [ new Player( 'red', false ), new Player( 'yellow', true ) ];
 	
 	this.incTurn = function() {
 		this.turn += 1;
@@ -30,6 +30,10 @@ var Game = function() {
 		});
 	}
 	
+	this.unbindClickZones = function() {
+		$( '.clickZone' ).unbind();
+	}
+	
 	this.initGameState = function( board ) {
 		var tempArray = [];
 		for( var x = 0; x < board.widthBlocks; x++ ) {
@@ -49,6 +53,7 @@ var Game = function() {
 			board.drawChip( zone, chipPlace, this.players[ this.getTurn() ].colour );
 			this.checkForWin( zone, chipPlace, board, this.players[ this.getTurn() ].colour );
 			this.incTurn();
+			mainLoop();
 		} else {
 			console.log( 'this column is full' );
 		}
@@ -219,7 +224,7 @@ var Board = function( ) {
 	this.blockWidth;
 	this.widthPx;
 	this.heightPx;
-	this.paddingPercent = 10;
+	this.paddingPercent = 8;
 	this.paddingPx = 0;
 	this.blockPPS = 0;												//block movement in pixels per second. This has to be relative to the size of the board
 	
@@ -246,16 +251,9 @@ var Board = function( ) {
 		this.widthPx = this.widthBlocks * this.blockWidth;
 		
 		//maybe PPS should be calculated elsewhere
-		this.blockPPS = this.heightPx * 2.5;
+		this.blockPPS = Math.floor( this.heightPx * 2.5 );
 		
-		console.log(this.widthBlocks);
-		console.log(this.heightBlocks);
-		console.log(this.blockWidth);
-		console.log(this.widthPx);
-		console.log(this.heightPx);
-		console.log(this.paddingPercent);
-		console.log(this.paddingPx);
-		console.log(this.blockPPS);											//block movement in pixels per second. This has to be relative to the size of the board
+								//block movement in pixels per second. This has to be relative to the size of the board
 	}
 	
 	this.drawBoard = function() {
@@ -268,7 +266,7 @@ var Board = function( ) {
 	}
 	
 	this.drawChip = function( x, y, color ) {
-		console.log( y );
+		//console.log( y );
 		$( '.board' ).prepend( '<div class="chip" id="game' + x + y + '"></div>' );
 		$( '#game' + x + y ).css( {
 			'top' : 0 - this.paddingPx - this.blockWidth,//'top'	: y * this.blockWidth,
@@ -278,8 +276,6 @@ var Board = function( ) {
 			'backgroundColor' : color,
 			'opacity' : 0
 		});
-		
-		console.log( ( this.paddingPx ) );
 		
 		var distanceToFall = ( y * this.blockWidth ) + this.paddingPx + this.blockWidth;
 		
@@ -313,6 +309,13 @@ var Board = function( ) {
 var Player = function( colour, isComputer ) {
 	this.colour = colour;
 	this.isComputer = isComputer;
+	
+	this.makeMove = function( board ) {						//computer player only
+		setTimeout( function() {
+			var myMove = Math.round( Math.random() * ( board.widthBlocks - 1 ) );
+			game.addChip( myMove, board );
+		}, 2000 );
+	};
 }
 
 function getViewport() {
@@ -330,18 +333,16 @@ var game = new Game();
 game.initGameState( board );
 board.createBoard();
 
-function mainLoop() {
-	//too much redrawing is happening
-	
+function redrawGame() {
 	var viewport = getViewport();
 	board.calculateDimensions( viewport );
 	board.drawBoard();
 	board.drawGame( game );
 	
 	game.drawClickZones( board );
-	game.bindClickZones( board, game );
-    
-    if ( viewport.x < 480) {
+	//game.bindClickZones( board, game );
+	
+	if ( viewport.x < 480) {
 
     }
     
@@ -358,9 +359,23 @@ function mainLoop() {
     }
 }
 
+function mainLoop() {
+	if( !game.players[ game.getTurn() ].isComputer ) {
+		game.bindClickZones( board, game );
+	} else {
+		console.log( 'computer turn' );
+		game.unbindClickZones();
+		game.players[ game.getTurn() ].makeMove( board );
+	}
+	//too much redrawing is happening
+}
+
 jQuery(document).ready(function($) {
+	redrawGame();
     mainLoop();
 	$( window ).smartresize(function(){
-	    mainLoop();	
+		console.log( 'resized' );
+		redrawGame();
+//	    mainLoop();
  	});
 });
