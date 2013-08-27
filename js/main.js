@@ -176,7 +176,7 @@ var Game = function() {
 		
 		if( startPointY > board.heightBlocks - 1 ) {
 			startPointY = board.heightBlocks - 1;
-			startPointX = chipX - ( startPointY - chipY  );//chipX - chipY;
+			startPointX = chipX - ( startPointY - chipY  );
 		}
 		
 		if( endPointX > board.widthBlocks - 1 ) {
@@ -266,7 +266,6 @@ var Board = function( ) {
 	}
 	
 	this.drawChip = function( x, y, color ) {
-		//console.log( y );
 		$( '.board' ).prepend( '<div class="chip" id="game' + x + y + '"></div>' );
 		$( '#game' + x + y ).css( {
 			'top' : 0 - this.paddingPx - this.blockWidth,//'top'	: y * this.blockWidth,
@@ -340,7 +339,6 @@ function redrawGame() {
 	board.drawGame( game );
 	
 	game.drawClickZones( board );
-	//game.bindClickZones( board, game );
 	
 	if ( viewport.x < 480) {
 
