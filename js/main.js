@@ -27,7 +27,6 @@ var Game = function() {
 	this.bindClickZones = function( board, game ) {
 		$( '.clickZone' ).tap( function() {
 			game.addChip( $( this ).data( 'id' ), board );
-			//mainLoop();
 		});
 	}
 	
@@ -41,21 +40,6 @@ var Game = function() {
 		}
 		
 		this.gameState = tempArray;
-		/*this.gameState =
-		[ [ 0, 0, 0, 0, 0, 0 ],
-		[ 0, 0, 0, 0, 0, 0 ],
-		[ 0, 0, 0, 0, 0, 0 ],
-		[ 0, 0, 0, 0, 0, 0 ],
-		[ 0, 0, 0, 0, 0, 0 ],
-		[ 0, 0, 0, 0, 0, 0 ],
-		[ 0, 0, 0, 0, 0, 0 ] ];*/
-		
-		/*this.gameState = [ [ 0, 0, 0, 0, 0, 0, 0],
-		[ 0, 0, 0, 0, 0, 0, 0],
-		[ 0, 0, 0, 0, 0, 0, 0],
-		[ 0, 0, 0, 0, 0, 0, 0],
-		[ 0, 0, 0, 0, 0, 0, 0],
-		[ 'red', 'red', 'red', 'red', 0, 0, 0] ];*/
 	}
 	
 	this.addChip = function( zone, board ) {
@@ -157,11 +141,6 @@ var Game = function() {
 			endPointX = chipX + board.heightBlocks - chipY - 1;
 		}
 		
-		/*console.log( 'startpoint: [' + startPointX + ', ' + startPointY + ']'  );
-		console.log( 'endpoint: [' + endPointX + ', ' + endPointY + ']'  );
-		
-		console.log( 'length: ' +  ( endPointX - startPointX + 1 ) );*/
-		
 		var loopLength = endPointX - startPointX + 1;
 		
 		for( var s = 0; s < loopLength; s++ ) {
@@ -205,11 +184,6 @@ var Game = function() {
 			endPointX = chipX - ( endPointY - chipY  );
 		}
 		
-		console.log( 'startpoint: [' + startPointX + ', ' + startPointY + ']'  );
-		console.log( 'endpoint: [' + endPointX + ', ' + endPointY + ']'  );
-		
-		console.log( 'length: ' +  ( endPointX - startPointX + 1 ) );
-		
 		var loopLength = endPointX - startPointX + 1;
 		
 		for( var s = 0; s < loopLength; s++ ) {
@@ -240,20 +214,21 @@ var Game = function() {
 }
 
 var Board = function( ) {
-	this.widthBlocks = 8;
-	this.heightBlocks = 8;
+	this.widthBlocks = 7;
+	this.heightBlocks = 6;
 	this.blockWidth;
 	this.widthPx;
 	this.heightPx;
 	this.paddingPercent = 10;
 	this.paddingPx = 0;
-	this.blockPPS = 100;												//block movement in pixels per second
+	this.blockPPS = 0;												//block movement in pixels per second. This has to be relative to the size of the board
 	
 	this.createBoard = function() {
 		$( 'body' ).append( '<div class="board"></div>' );
 	}
 	
 	this.calculateDimensions = function( viewport ) {
+		console.log( 'calcing dims' );
 		if( viewport.x >= viewport.y ) {
 			this.paddingPx = Math.floor( viewport.y / this.paddingPercent );
 			this.blockWidth = Math.floor( ( viewport.y - ( this.paddingPx * 2 ) ) / this.heightBlocks );
@@ -261,7 +236,7 @@ var Board = function( ) {
 				this.blockWidth = Math.floor( ( viewport.x - ( this.paddingPx * 2 ) ) / this.widthBlocks );	
 			}
 		} else {	
-			this.paddingPx = viewport.x / this.paddingPercent;	
+			this.paddingPx = Math.floor( viewport.x / this.paddingPercent );
 			this.blockWidth = Math.floor( ( viewport.x - ( this.paddingPx * 2 ) ) / this.widthBlocks );
 			if( ( this.blockWidth * this.heightBlocks ) > viewport.y ) {
 				this.blockWidth = Math.floor( ( viewport.y - ( this.paddingPx * 2 ) ) / this.heightBlocks );	
@@ -269,6 +244,18 @@ var Board = function( ) {
 		}
 		this.heightPx = this.heightBlocks * this.blockWidth;
 		this.widthPx = this.widthBlocks * this.blockWidth;
+		
+		//maybe PPS should be calculated elsewhere
+		this.blockPPS = this.heightPx * 2.5;
+		
+		console.log(this.widthBlocks);
+		console.log(this.heightBlocks);
+		console.log(this.blockWidth);
+		console.log(this.widthPx);
+		console.log(this.heightPx);
+		console.log(this.paddingPercent);
+		console.log(this.paddingPx);
+		console.log(this.blockPPS);											//block movement in pixels per second. This has to be relative to the size of the board
 	}
 	
 	this.drawBoard = function() {
@@ -288,7 +275,8 @@ var Board = function( ) {
 			'left'	: x * this.blockWidth,
 			'width' : this.blockWidth,
 			'height' : this.blockWidth,
-			'backgroundColor' : color
+			'backgroundColor' : color,
+			'opacity' : 0
 		});
 		
 		console.log( ( this.paddingPx ) );
@@ -298,8 +286,9 @@ var Board = function( ) {
 		var animTime = ( distanceToFall / this.blockPPS ) * 1000;
 		
 		$( '#game' + x + y ).animate({
-			'top' : '+=' + distanceToFall
-		}, animTime, 'linear');
+			'top' : '+=' + distanceToFall,
+			'opacity' : 1
+		}, animTime, 'linear' );
 	}
 	
 	this.drawGame = function( game ) {
