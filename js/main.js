@@ -308,12 +308,27 @@ var Board = function( ) {
 var Player = function( colour, isComputer ) {
 	this.colour = colour;
 	this.isComputer = isComputer;
+	this.compTurnDelay = 300;							//add a minimum of computer "thinking" time
+	this.compTurnDelayRandom = 1100;					//add a random amount on top
 	
-	this.makeMove = function( board ) {						//computer player only
-		setTimeout( function() {
-			var myMove = Math.round( Math.random() * ( board.widthBlocks - 1 ) );
-			game.addChip( myMove, board );
-		}, 2000 );
+	this.makeMove = function( board, game ) {													//computer player only
+		if( game.turn == 0 || game.turn == 1 ) {												//first move is random
+			setTimeout( function() {															//but don't do it instantly - add a delay as "thinking" time
+				var myMove = Math.round( Math.random() * ( board.widthBlocks - 1 ) );
+				game.addChip( myMove, board );
+			}, this.getThinkingTime() );
+		} else {
+			console.log( 'comp next turn' );
+																								//check the player's moves, and that they're not able to join four
+																								//if they are, add own chip there
+																								//otherwise, check all the moves along the grid, for your own colour
+																								//whichever is highest in terms of line length, add on to that one (whichever is first)
+			
+		}
+	};
+	
+	this.getThinkingTime = function() {
+		return Math.round( ( Math.random() * this.compTurnDelayRandom ) + this.compTurnDelay );
 	};
 }
 
@@ -363,7 +378,7 @@ function mainLoop() {
 	} else {
 		console.log( 'computer turn' );
 		game.unbindClickZones();
-		game.players[ game.getTurn() ].makeMove( board );
+		game.players[ game.getTurn() ].makeMove( board, game );
 	}
 	//too much redrawing is happening
 }
