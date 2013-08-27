@@ -16,7 +16,7 @@ var Game = function() {
 	
 	this.drawClickZones = function( board ) {
 		for( var i = 0; i < board.widthBlocks; i++ ) {
-			$( '.board' ).prepend( '<a href="#" class="clickZone" id="cz' + i + '" data-id="' + i + '"	></a>' );
+			$( '.board' ).prepend( '<a class="clickZone" id="cz' + i + '" data-id="' + i + '"	></a>' );
 			$( '#cz' + i ).css({
 				'width' : board.blockWidth,
 				'height' : board.heightPx
@@ -25,9 +25,9 @@ var Game = function() {
 	}
 	
 	this.bindClickZones = function( board, game ) {
-		$( '.clickZone' ).click( function() {
+		$( '.clickZone' ).tap( function() {
 			game.addChip( $( this ).data( 'id' ), board );
-			mainLoop();
+			//mainLoop();
 		});
 	}
 	
@@ -62,6 +62,7 @@ var Game = function() {
 		var chipPlace = this.getEmpty( zone, board );
 		if( chipPlace !== false ) {																		//if the column isn't full
 			this.gameState[ zone ][ chipPlace ] = this.players[ this.getTurn() ].colour;
+			board.drawChip( zone, chipPlace, this.players[ this.getTurn() ].colour );
 			this.checkForWin( zone, chipPlace, board, this.players[ this.getTurn() ].colour );
 			this.incTurn();
 		} else {
@@ -246,6 +247,7 @@ var Board = function( ) {
 	this.heightPx;
 	this.paddingPercent = 10;
 	this.paddingPx = 0;
+	this.blockPPS = 100;												//block movement in pixels per second
 	
 	this.createBoard = function() {
 		$( 'body' ).append( '<div class="board"></div>' );
@@ -253,7 +255,7 @@ var Board = function( ) {
 	
 	this.calculateDimensions = function( viewport ) {
 		if( viewport.x >= viewport.y ) {
-			this.paddingPx = viewport.y / this.paddingPercent;
+			this.paddingPx = Math.floor( viewport.y / this.paddingPercent );
 			this.blockWidth = Math.floor( ( viewport.y - ( this.paddingPx * 2 ) ) / this.heightBlocks );
 			if( ( this.blockWidth * this.widthBlocks ) > viewport.x ) {
 				this.blockWidth = Math.floor( ( viewport.x - ( this.paddingPx * 2 ) ) / this.widthBlocks );	
@@ -278,13 +280,33 @@ var Board = function( ) {
 		});
 	}
 	
+	this.drawChip = function( x, y, color ) {
+		console.log( y );
+		$( '.board' ).prepend( '<div class="chip" id="game' + x + y + '"></div>' );
+		$( '#game' + x + y ).css( {
+			'top' : 0 - this.paddingPx - this.blockWidth,//'top'	: y * this.blockWidth,
+			'left'	: x * this.blockWidth,
+			'width' : this.blockWidth,
+			'height' : this.blockWidth,
+			'backgroundColor' : color
+		});
+		
+		console.log( ( this.paddingPx ) );
+		
+		var distanceToFall = ( y * this.blockWidth ) + this.paddingPx + this.blockWidth;
+		
+		var animTime = ( distanceToFall / this.blockPPS ) * 1000;
+		
+		$( '#game' + x + y ).animate({
+			'top' : '+=' + distanceToFall
+		}, animTime, 'linear');
+	}
+	
 	this.drawGame = function( game ) {
 		for( var x = 0; x < this.widthBlocks; x++ ) {
 			for( var y = 0; y < this.heightBlocks; y++ ) {
-				//console.log( 'draw' + x + ' ' + y );
 				if( game.gameState[ x ][ y ] != 0 ) {
-					$( '.board' ).prepend( '<div class="chip" id="game' + x + y + '"></div>' );
-					
+					$( '.board' ).prepend( '<div class="chip" id="game' + x + y + '"></div>' );	
 					$( '#game' + x + y  ).css({
 						'width' : this.blockWidth,
 						'height' : this.blockWidth,

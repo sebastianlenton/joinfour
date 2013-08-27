@@ -1,74 +1,213 @@
+/******************************************************************
+Site Name: 
+Author: 
+
+Stylesheet: IE Stylesheet
+
+So instead of using the respond.js file to add media query support
+to IE, we're going to use SASS to create an easily readable css file.
+Here, we import all the styles the standard stylesheet gets, only
+without the media queries. No need to worry about editing anything!
+
+******************************************************************/
 /*
-Syntax error: File to import not found or unreadable: 1030up.
-              Load paths:
-                /Users/sebastianlenton
-                /Users/sebastianlenton/sites/joinfour/scss
-        on line 29 of /Users/sebastianlenton/sites/joinfour/scss/ie.scss
-
-24: /* import mixins */
-25: @import "mixins";
-26: 
-27: @import "480up";					//uncomment these (or add to them) depending on the situation
-28: @import "768up";
-29: @import "1030up";
-30: 
-31: /* 
-32: you can call the larger styles if you want, but there's really no need 
-33: */
-34: 
-
-Backtrace:
-/Users/sebastianlenton/sites/joinfour/scss/ie.scss:29
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/tree/import_node.rb:67:in `import'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/tree/import_node.rb:28:in `imported_file'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/tree/import_node.rb:37:in `css_import?'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/tree/visitors/perform.rb:217:in `visit_import'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/tree/visitors/base.rb:37:in `send'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/tree/visitors/perform.rb:100:in `visit'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/tree/visitors/base.rb:53:in `visit_children'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/tree/visitors/base.rb:53:in `map'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/tree/visitors/base.rb:53:in `visit_children'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/tree/visitors/perform.rb:109:in `visit_children'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/tree/visitors/perform.rb:121:in `with_environment'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/tree/visitors/perform.rb:108:in `visit_children'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/tree/visitors/perform.rb:128:in `visit_root'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/tree/visitors/base.rb:37:in `send'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/tree/visitors/perform.rb:100:in `visit'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/tree/visitors/perform.rb:7:in `send'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/tree/visitors/perform.rb:7:in `visit'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/tree/root_node.rb:20:in `render'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/engine.rb:315:in `_render'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/engine.rb:262:in `render'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/plugin/compiler.rb:341:in `update_stylesheet'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/plugin/compiler.rb:203:in `update_stylesheets'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/plugin/compiler.rb:201:in `each'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/plugin/compiler.rb:201:in `update_stylesheets'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/plugin/compiler.rb:299:in `watch'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/vendor/listen/lib/listen/multi_listener.rb:108:in `call'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/vendor/listen/lib/listen/multi_listener.rb:108:in `on_change'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/vendor/listen/lib/listen/multi_listener.rb:117:in `initialize_adapter'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/vendor/listen/lib/listen/adapters/polling.rb:56:in `call'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/vendor/listen/lib/listen/adapters/polling.rb:56:in `poll'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/vendor/listen/lib/listen/adapters/polling.rb:32:in `start'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/vendor/listen/lib/listen/adapters/polling.rb:32:in `initialize'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/vendor/listen/lib/listen/adapters/polling.rb:32:in `new'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/vendor/listen/lib/listen/adapters/polling.rb:32:in `start'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/vendor/listen/lib/listen/multi_listener.rb:44:in `start'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/plugin/compiler.rb:307:in `watch'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/plugin.rb:107:in `send'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/plugin.rb:107:in `method_missing'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/exec.rb:444:in `watch_or_update'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/exec.rb:307:in `process_result'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/exec.rb:41:in `parse'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/../lib/sass/../sass/exec.rb:21:in `parse!'
-/Library/Ruby/Gems/1.8/gems/sass-3.2.6/bin/sass:9
-/usr/bin/sass:19:in `load'
-/usr/bin/sass:19
+Remember, all the BASE styles are called already since IE can
+read those. Below, we need to import only the stuff IE can't 
+understand (what's inside the media queries). We also need to
+import the mixins file so SASS can understand the variables.
 */
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Syntax error: File to import not found or unreadable: 1030up.\A               Load paths:\A                 /Users/sebastianlenton\A                 /Users/sebastianlenton/sites/joinfour/scss\A         on line 29 of /Users/sebastianlenton/sites/joinfour/scss/ie.scss\A \A 24: /* import mixins */\A 25: @import \"mixins\";\A 26: \A 27: @import \"480up\";					//uncomment these (or add to them) depending on the situation\A 28: @import \"768up\";\A 29: @import \"1030up\";\A 30: \A 31: /* \A 32: you can call the larger styles if you want, but there's really no need \A 33: */\A 34: "; }
+/* import mixins */
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Mixins & Constants Stylesheet
+
+This is where you can take advantage of Sass' great features:
+Mixins & Constants. I won't go in-depth on how they work exactly,
+there are a few articles below that will help do that. What I will
+tell you is that this will help speed up simple changes like
+changing a color or adding CSS3 techniques gradients.
+
+A WORD OF WARNING: It's very easy to overdo it here. Be careful and
+remember less is more.
+
+******************************************************************/
+/********************
+FONT FACE
+******************/
+/*@font-face {
+    font-family: 'League Gothic';
+    src: url('../fonts/leaguegothic/leaguegothic-regular-webfont.eot');
+    src: url('../fonts/leaguegothic/leaguegothic-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/leaguegothic/leaguegothic-regular-webfont.woff') format('woff'),
+         url('../fonts/leaguegothic/leaguegothic-regular-webfont.ttf') format('truetype'),
+         url('../fonts/leaguegothic/leaguegothic-regular-webfont.svg#league_gothicregular') format('svg');
+    font-weight: normal;
+}*/
+/*********************
+COLORS
+Need help w/ choosing your colors? Try this site out:
+http://0to255.com/
+*********************/
+/*
+Here's a great tutorial on how to
+use color variables properly:
+http://sachagreif.com/sass-color-variables/
+*/
+/*********************
+ELEMENT COLOURS
+*********************/
+/*********************
+TYPOGRAPHY
+*********************/
+/*
+use the best ampersand
+http://simplebits.com/notebook/2008/08/14/ampersands-2/
+*/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_mixins\.scss}line{font-family:\0000382}}
+span.amp {
+  font-family: Baskerville, "" Libre Baskerville " Old Style", Palatino, "Book Antiqua", serif !important;
+  font-style: italic; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_mixins\.scss}line{font-family:\0000389}}
+.text-left {
+  text-align: left; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_mixins\.scss}line{font-family:\0000390}}
+.text-center {
+  text-align: center; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_mixins\.scss}line{font-family:\0000391}}
+.text-right {
+  text-align: right; }
+
+/*********************
+TRANSITION
+*********************/
+/*********************
+VARIOUS MIXINS
+*********************/
+/* @include css-gradient(#dfdfdf,#f8f8f8); */
+/*
+I totally rewrote this to be cleaner and easier to use.
+You'll need to be using Sass 3.2+ for these to work.
+Thanks to @anthonyshort for the inspiration on these.
+USAGE: @include transition(all 0.2s ease-in-out);
+*/
+/******************************************************************
+Site Name: 
+Author: 
+
+Stylesheet: 
+
+******************************************************************/
+/*********************
+GENERAL STYLES
+*********************/
+/*********************
+LAYOUT & GRID STYLES
+*********************/
+/*********************
+TYPE
+*********************/
+/*********************
+HEADER STYLES
+*********************/
+/*********************
+LOGO STYLES
+*********************/
+/*********************
+NAVIGATION STYLES
+*********************/
+/*********************
+SIDEBARS & ASIDES
+*********************/
+/*********************
+FOOTER STYLES
+*********************/
+/*********************
+TRANSITIONS
+*********************/
+/******************************************************************
+Site Name: 
+Author: 
+
+Stylesheet: 
+
+******************************************************************/
+/*********************
+GENERAL STYLES
+*********************/
+/*********************
+LAYOUT & GRID STYLES
+*********************/
+/*********************
+TYPE
+*********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_768up\.scss}line{font-family:\0000324}}
+body {
+  font-size: 22px; }
+
+/*********************
+HEADER STYLES
+*********************/
+/*********************
+LOGO STYLES
+*********************/
+/*********************
+NAVIGATION STYLES
+*********************/
+/*********************
+SIDEBARS & ASIDES
+*********************/
+/*********************
+FOOTER STYLES
+*********************/
+/*********************
+TRANSITIONS
+*********************/
+/******************************************************************
+Site Name: 
+Author: 
+
+Stylesheet: 
+
+******************************************************************/
+/*********************
+GENERAL STYLES
+*********************/
+/*********************
+LAYOUT & GRID STYLES
+*********************/
+/*********************
+TYPE
+*********************/
+/*********************
+HEADER STYLES
+*********************/
+/*********************
+LOGO STYLES
+*********************/
+/*********************
+NAVIGATION STYLES
+*********************/
+/*********************
+SIDEBARS & ASIDES
+*********************/
+/*********************
+FOOTER STYLES
+*********************/
+/*********************
+TRANSITIONS
+*********************/
+/* 
+you can call the larger styles if you want, but there's really no need 
+*/
+/******************************************************************
+ADDITIONAL IE FIXES
+These fixes are now ONLY seen by IE, so you don't have to worry
+about using prefixes, although it's best practice. For more info
+on using Modernizr classes, check out this link:
+http://www.modernizr.com/docs/
+******************************************************************/

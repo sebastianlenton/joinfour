@@ -81,6 +81,7 @@ body {
 	float:right;
 	position:relative;
 	z-index:100;
+	-webkit-tap-highlight-color: transparent;
 	
 	&:nth-of-type( 2n ) {
 		background:rgba( 255, 255, 255, 0.1 );
@@ -90,6 +91,15 @@ body {
 .chip {
 	position:absolute;
 	z-index:0;
+	top:0;
+	left:0;
+	width:20px;
+	height:20px;
+	background-color:$offBlack;
+//	-webkit-transition-property: color;
+//  -webkit-transition-duration: 4s;
+//  -webkit-transition-delay: 0;
+    
 }
 
 /*********************
@@ -116,7 +126,7 @@ a, a:visited {
 		so it basically works like the :hover selector
 		for mobile devices.
 		*/
-		-webkit-tap-highlight-color : rgba( 0, 0, 0, 0.3 );
+		-webkit-tap-highlight-color : rgba( 255, 0, 0, 1 );				//and I don't think this is very relevant to what I'm doing now.
 	}
 }
 
