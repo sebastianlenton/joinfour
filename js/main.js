@@ -1,6 +1,8 @@
 "use strict"
 
 var Game = function() {
+	this.apes = 77;
+	this.apes2 = 'apees';
 	this.numberToConnect = 4;																	//so you could do connect X instead if you want
 	this.turn = 0;
 	this.gameState = [];
@@ -10,8 +12,12 @@ var Game = function() {
 		this.turn += 1;
 	}
 	
-	this.getTurn = function() {
-		return this.turn % 2;
+	this.getTurn = function( next) {
+		if( next === true ) {
+			return ( this.turn + 1 ) % 2;
+		} else {
+			return this.turn % 2;
+		}
 	}
 	
 	this.drawClickZones = function( board ) {
@@ -47,11 +53,11 @@ var Game = function() {
 	}
 	
 	this.addChip = function( zone, board ) {
-		var chipPlace = this.getEmpty( zone, board );
+		var chipPlace = this.getEmpty( zone, board, game.gameState );
 		if( chipPlace !== false ) {																		//if the column isn't full
 			this.gameState[ zone ][ chipPlace ] = this.players[ this.getTurn() ].colour;
 			board.drawChip( zone, chipPlace, this.players[ this.getTurn() ].colour );
-			this.checkForWin( zone, chipPlace, board, this.players[ this.getTurn() ].colour );
+			this.checkForWin( zone, chipPlace, board, this.players[ this.getTurn() ].colour, game.gameState );
 			this.incTurn();
 			mainLoop();
 		} else {
@@ -59,7 +65,7 @@ var Game = function() {
 		}
 	}
 	
-	this.checkForWin = function( chipX, chipY, board, colour ) {
+	this.checkForWin = function( chipX, chipY, board, colour, gameState ) {
 		//to check for a line you need to check from x - ( numberToConnect - 1 ) to ( x + numberToconnect - 1 )
 		//this is all a bit whack
 		
@@ -79,7 +85,7 @@ var Game = function() {
 		var output = 0;
 		
 		for( var s = startPoint; s <= endPoint; s++ ) {
-			if( this.gameState[ s ][ chipY ] == colour ) {
+			if( gameState[ s ][ chipY ] == colour ) {
 				accumulator++;
 				if( accumulator > output ) {
 					output = accumulator;
@@ -106,7 +112,7 @@ var Game = function() {
 		}
 		
 		for( var s = startPoint; s <= endPoint; s++ ) {
-			if( this.gameState[ chipX ][ s ] == colour ) {
+			if( gameState[ chipX ][ s ] == colour ) {
 				accumulator++;
 				if( accumulator > output ) {
 					output = accumulator;
@@ -149,7 +155,7 @@ var Game = function() {
 		var loopLength = endPointX - startPointX + 1;
 		
 		for( var s = 0; s < loopLength; s++ ) {
-			if( this.gameState[ startPointX + s ][ startPointY + s ] == colour ) {
+			if( gameState[ startPointX + s ][ startPointY + s ] == colour ) {
 				accumulator++;
 				if( accumulator > output ) {
 					output = accumulator;
@@ -192,7 +198,7 @@ var Game = function() {
 		var loopLength = endPointX - startPointX + 1;
 		
 		for( var s = 0; s < loopLength; s++ ) {
-			if( this.gameState[ startPointX + s ][ startPointY - s ] == colour ) {
+			if( gameState[ startPointX + s ][ startPointY - s ] == colour ) {
 				accumulator++;
 				if( accumulator > output ) {
 					output = accumulator;
@@ -205,12 +211,13 @@ var Game = function() {
 			}
 		}
 		
-		console.log( 'line detected of ' + output );
+		//console.log( 'line detected of ' + output );
+		return output;
 	}
 	
-	this.getEmpty = function( zone, board ) {
+	this.getEmpty = function( zone, board, gameState ) {
 		for( var y = board.heightBlocks - 1 ; y >= 0; y-- ) {
-			if( this.gameState[ zone ][ y ] == 0 ) {
+			if( gameState[ zone ][ y ] == 0 ) {
 				return y;
 			}
 		}
@@ -311,19 +318,37 @@ var Player = function( colour, isComputer ) {
 	this.compTurnDelay = 300;							//add a minimum of computer "thinking" time
 	this.compTurnDelayRandom = 1100;					//add a random amount on top
 	
+	this.randomMove = function( board, game ) {													//computer player only
+		setTimeout( function() {																//but don't do it instantly - add a delay as "thinking" time
+			var myMove = Math.round( Math.random() * ( board.widthBlocks - 1 ) );
+			game.addChip( myMove, board );
+		}, this.getThinkingTime() );
+	}
+	this.calculatedMove = function( board, game) {
+		for( var w = 0; w < board.widthBlocks; w ++ )	{
+			var tempGameState = copyArray( game.gameState );
+			//console.log( tempGameState );
+			
+			var chipPlace = game.getEmpty( w, board, game.gameState );
+			if( chipPlace !== false ) {																		//if the column isn't full
+				var nextTurnColour = game.players[ game.getTurn( true ) ].colour;
+				tempGameState[ w ][ chipPlace ] = nextTurnColour;
+				console.log( nextTurnColour + ' enemy potential line of ' + game.checkForWin( w, chipPlace, board, nextTurnColour, tempGameState ) );
+				
+//				console.log( 'game:' + game.gameState[0][0] );
+			}																					//check the player's moves, and that they're not able to join four
+																								//if they are, add own chip there
+		}																						//otherwise, check all the moves along the grid, for your own colour
+																								//whichever is highest in terms of line length, add on to that one (whichever is first)		
+																								
+    this.randomMove( board, game );
+	}
 	this.makeMove = function( board, game ) {													//computer player only
 		if( game.turn == 0 || game.turn == 1 ) {												//first move is random
-			setTimeout( function() {															//but don't do it instantly - add a delay as "thinking" time
-				var myMove = Math.round( Math.random() * ( board.widthBlocks - 1 ) );
-				game.addChip( myMove, board );
-			}, this.getThinkingTime() );
+			this.randomMove( board, game );
 		} else {
 			console.log( 'comp next turn' );
-																								//check the player's moves, and that they're not able to join four
-																								//if they are, add own chip there
-																								//otherwise, check all the moves along the grid, for your own colour
-																								//whichever is highest in terms of line length, add on to that one (whichever is first)
-			
+			this.calculatedMove( board, game );
 		}
 	};
 	
@@ -339,6 +364,17 @@ function getViewport() {
 	};
 	
 	return viewport;
+}
+
+function copyArray( arrayToBeCopied ) {
+	var newArray = [];
+	for( var x = 0; x < arrayToBeCopied.length; x++ ) {
+		newArray[ x ] = [];
+		for( var y = 0; y < arrayToBeCopied[x].length; y++ ) {
+			newArray[x][y] = arrayToBeCopied[x][y];
+		}
+	}
+	return newArray;
 }
 
 var board = new Board();
