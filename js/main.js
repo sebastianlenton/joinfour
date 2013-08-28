@@ -1,4 +1,9 @@
 "use strict"
+//todo:
+//stop random move from 'blocking' the game if the comp attempts to do a move into a col which is full
+//do comp detect own potential to make a 4
+//should I do more thoughtful moves for comp (if there's no chance of winning/losing that turn) or just keep it as random?
+//front end
 
 var Game = function() {
 	this.numberToConnect = 4;																	//so you could do connect X instead if you want
@@ -257,7 +262,6 @@ var Board = function( ) {
 		
 		//maybe PPS should be calculated elsewhere
 		this.blockPPS = Math.floor( this.heightPx * 2.5 );
-		
 								//block movement in pixels per second. This has to be relative to the size of the board
 	}
 	
@@ -313,33 +317,44 @@ var Board = function( ) {
 var Player = function( colour, isComputer ) {
 	this.colour = colour;
 	this.isComputer = isComputer;
-	this.compTurnDelay = 300;							//add a minimum of computer "thinking" time
-	this.compTurnDelayRandom = 1100;					//add a random amount on top
+	this.compTurnDelay = 300;																		//add a minimum of computer "thinking" time
+	this.compTurnDelayRandom = 1100;																//add a random amount on top
 	
-	this.randomMove = function( board, game ) {													//computer player only
-		setTimeout( function() {																//but don't do it instantly - add a delay as "thinking" time
+	this.randomMove = function( board, game ) {														//computer player only
+		setTimeout( function() {																	//but don't do it instantly - add a delay as "thinking" time
 			var myMove = Math.round( Math.random() * ( board.widthBlocks - 1 ) );
 			game.addChip( myMove, board );
 		}, this.getThinkingTime() );
 	}
+	
 	this.calculatedMove = function( board, game) {
-		for( var w = 0; w < board.widthBlocks; w ++ )	{
+		//worst. code. ever.
+		var enemyThisPosition = false;
+		for( var w = 0; w < board.widthBlocks; w ++ )	{											//check the player's moves, and that they're not able to join four
 			var tempGameState = copyArray( game.gameState );
-			//console.log( tempGameState );
 			
 			var chipPlace = game.getEmpty( w, board, game.gameState );
-			if( chipPlace !== false ) {																		//if the column isn't full
+			if( chipPlace !== false ) {																//if the column isn't full
 				var nextTurnColour = game.players[ game.getTurn( true ) ].colour;
 				tempGameState[ w ][ chipPlace ] = nextTurnColour;
-				console.log( nextTurnColour + ' enemy potential line of ' + game.checkForWin( w, chipPlace, board, nextTurnColour, tempGameState ) );
-				
-//				console.log( 'game:' + game.gameState[0][0] );
-			}																					//check the player's moves, and that they're not able to join four
+				if( game.checkForWin( w, chipPlace, board, nextTurnColour, tempGameState ) == game.numberToConnect ) {
+					enemyThisPosition = w;
+					break;
+				}
+			} else {
+				console.log( nextTurnColour + ' enemy potential line of 0' );
+			}																					
 																								//if they are, add own chip there
-		}																						//otherwise, check all the moves along the grid, for your own colour
+		}																						
+																								//otherwise, check all the moves along the grid, for your own colour
 																								//whichever is highest in terms of line length, add on to that one (whichever is first)		
-																								
-    this.randomMove( board, game );
+		if( enemyThisPosition !== false )	{
+			setTimeout( function() {																	//but don't do it instantly - add a delay as "thinking" time
+				game.addChip( enemyThisPosition, board );
+			}, this.getThinkingTime() );
+		} else {
+			this.randomMove( board, game );	
+		}
 	}
 	this.makeMove = function( board, game ) {													//computer player only
 		if( game.turn == 0 || game.turn == 1 ) {												//first move is random
