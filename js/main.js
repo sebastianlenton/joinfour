@@ -1,8 +1,6 @@
 "use strict"
 
 var Game = function() {
-	this.apes = 77;
-	this.apes2 = 'apees';
 	this.numberToConnect = 4;																	//so you could do connect X instead if you want
 	this.turn = 0;
 	this.gameState = [];
