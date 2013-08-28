@@ -1,12 +1,12 @@
 "use strict"
 //todo:
-//stop random move from 'blocking' the game if the comp attempts to do a move into a col which is full
+//detect if board is full
 //do comp detect own potential to make a 4
 //should I do more thoughtful moves for comp (if there's no chance of winning/losing that turn) or just keep it as random?
 //front end
 
 var Game = function() {
-	this.numberToConnect = 4;																	//so you could do connect X instead if you want
+	this.numberToConnect = 6;																	//so you could do connect X instead if you want
 	this.turn = 0;
 	this.gameState = [];
 	this.players = [ new Player( 'red', false ), new Player( 'yellow', true ) ];
@@ -23,7 +23,15 @@ var Game = function() {
 		}
 	}
 	
-	this.drawClickZones = function( board ) {
+	this.checkTurnsAreLeft = function( board ) {
+		if( this.turn  < board.widthBlocks * board.heightBlocks ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	this.drawClickZones = function( board ) {									//this should really be in Board, I guess (so game logic and drawing are separate)
 		for( var i = 0; i < board.widthBlocks; i++ ) {
 			$( '.board' ).prepend( '<a class="clickZone" id="cz' + i + '" data-id="' + i + '"	></a>' );
 			$( '#cz' + i ).css({
@@ -33,7 +41,7 @@ var Game = function() {
 		}
 	}
 	
-	this.bindClickZones = function( board, game ) {
+	this.bindClickZones = function( board, game ) {								//this should really be in Board, I guess (so game logic and drawing are separate)
 		$( '.clickZone' ).tap( function() {
 			game.addChip( $( this ).data( 'id' ), board );
 		});
@@ -56,13 +64,18 @@ var Game = function() {
 	}
 	
 	this.addChip = function( zone, board ) {
-		var chipPlace = this.getEmpty( zone, board, game.gameState );
+		var chipPlace = this.getEmpty( zone, board, game.gameState );									//this should be moved out of this function!
 		if( chipPlace !== false ) {																		//if the column isn't full
 			this.gameState[ zone ][ chipPlace ] = this.players[ this.getTurn() ].colour;
 			board.drawChip( zone, chipPlace, this.players[ this.getTurn() ].colour );
-			this.checkForWin( zone, chipPlace, board, this.players[ this.getTurn() ].colour, game.gameState );
-			this.incTurn();
-			mainLoop();
+			var longestLine = this.checkForWin( zone, chipPlace, board, this.players[ this.getTurn() ].colour, game.gameState );
+			if( longestLine >= this.numberToConnect ) {
+				console.log( 'game won by' + this.players[ this.getTurn() ].colour );
+				this.unbindClickZones();
+			} else {
+				this.incTurn();
+				mainLoop();
+			}
 		} else {
 			console.log( 'this column is full' );
 		}
@@ -320,17 +333,31 @@ var Player = function( colour, isComputer ) {
 	this.compTurnDelay = 300;																		//add a minimum of computer "thinking" time
 	this.compTurnDelayRandom = 1100;																//add a random amount on top
 	
-	this.randomMove = function( board, game ) {														//computer player only
-		setTimeout( function() {																	//but don't do it instantly - add a delay as "thinking" time
+	//the below methods are for computer AI moves
+	this.randomMove = function( board, game ) {														
+		var myMove = Math.round( Math.random() * ( board.widthBlocks - 1 ) );
+		var chipPlace = game.getEmpty( myMove, board, game.gameState );
+		
+		var tempAccumulate = 0;
+		
+		while( chipPlace === false ) {																//if the column is full, keep doing it
 			var myMove = Math.round( Math.random() * ( board.widthBlocks - 1 ) );
+			var chipPlace = game.getEmpty( myMove, board, game.gameState );
+			tempAccumulate++;
+			if( tempAccumulate > 50 ) {
+				console.log( 'no more room, everyone died' );
+			}
+		}
+	
+		setTimeout( function() {																	//but don't do it instantly - add a delay as "thinking" time
 			game.addChip( myMove, board );
 		}, this.getThinkingTime() );
 	}
 	
-	this.calculatedMove = function( board, game) {
+	this.calculatedMove = function( board, game) {													
 		//worst. code. ever.
 		var enemyThisPosition = false;
-		for( var w = 0; w < board.widthBlocks; w ++ )	{											//check the player's moves, and that they're not able to join four
+		for( var w = 0; w < board.widthBlocks; w ++ )	{											//check the player's moves, and that they're not able to join four in next turn - if so, block
 			var tempGameState = copyArray( game.gameState );
 			
 			var chipPlace = game.getEmpty( w, board, game.gameState );
@@ -344,10 +371,9 @@ var Player = function( colour, isComputer ) {
 			} else {
 				console.log( nextTurnColour + ' enemy potential line of 0' );
 			}																					
-																								//if they are, add own chip there
+																									//I ought to add a check for comp opportunities to win at some point
 		}																						
-																								//otherwise, check all the moves along the grid, for your own colour
-																								//whichever is highest in terms of line length, add on to that one (whichever is first)		
+																								
 		if( enemyThisPosition !== false )	{
 			setTimeout( function() {																	//but don't do it instantly - add a delay as "thinking" time
 				game.addChip( enemyThisPosition, board );
@@ -356,11 +382,10 @@ var Player = function( colour, isComputer ) {
 			this.randomMove( board, game );	
 		}
 	}
-	this.makeMove = function( board, game ) {													//computer player only
+	this.makeMove = function( board, game ) {													
 		if( game.turn == 0 || game.turn == 1 ) {												//first move is random
 			this.randomMove( board, game );
 		} else {
-			console.log( 'comp next turn' );
 			this.calculatedMove( board, game );
 		}
 	};
@@ -422,14 +447,18 @@ function redrawGame() {
 }
 
 function mainLoop() {
-	if( !game.players[ game.getTurn() ].isComputer ) {
-		game.bindClickZones( board, game );
+	if( game.checkTurnsAreLeft( board ) ) {
+		if( !game.players[ game.getTurn() ].isComputer ) {
+			game.bindClickZones( board, game );
+		} else {
+			console.log( 'computer turn' );
+			game.unbindClickZones();
+			game.players[ game.getTurn() ].makeMove( board, game );
+		}
 	} else {
-		console.log( 'computer turn' );
 		game.unbindClickZones();
-		game.players[ game.getTurn() ].makeMove( board, game );
+		console.log( 'no turns left - draw' );
 	}
-	//too much redrawing is happening
 }
 
 jQuery(document).ready(function($) {
