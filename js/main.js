@@ -1,15 +1,16 @@
 "use strict"
 //todo:
-//detect if board is full
+
 //do comp detect own potential to make a 4
 //should I do more thoughtful moves for comp (if there's no chance of winning/losing that turn) or just keep it as random?
 //front end
 
 var Game = function() {
-	this.numberToConnect = 6;																	//so you could do connect X instead if you want
+	this.won = false;
+	this.numberToConnect = 4;																	//so you could do connect X instead if you want
 	this.turn = 0;
 	this.gameState = [];
-	this.players = [ new Player( 'red', false ), new Player( 'yellow', true ) ];
+	this.players = [ new Player( 'yellow', true ), new Player( 'red', false ) ];
 	
 	this.incTurn = function() {
 		this.turn += 1;
@@ -34,6 +35,11 @@ var Game = function() {
 	this.drawClickZones = function( board ) {									//this should really be in Board, I guess (so game logic and drawing are separate)
 		for( var i = 0; i < board.widthBlocks; i++ ) {
 			$( '.board' ).prepend( '<a class="clickZone" id="cz' + i + '" data-id="' + i + '"	></a>' );
+		}
+	}
+	
+	this.calcClickZonesCSS = function( board ) {
+		for( var i = 0; i < board.widthBlocks; i++ ) {
 			$( '#cz' + i ).css({
 				'width' : board.blockWidth,
 				'height' : board.heightPx
@@ -41,9 +47,10 @@ var Game = function() {
 		}
 	}
 	
-	this.bindClickZones = function( board, game ) {								//this should really be in Board, I guess (so game logic and drawing are separate)
+	this.bindClickZones = function( board, game, frontEnd ) {								//this should really be in Board, I guess (so game logic and drawing are separate)
 		$( '.clickZone' ).tap( function() {
-			game.addChip( $( this ).data( 'id' ), board );
+			console.log( 'clickzone' );
+			game.addChip( $( this ).data( 'id' ), board, frontEnd );
 		});
 	}
 	
@@ -52,6 +59,8 @@ var Game = function() {
 	}
 	
 	this.initGameState = function( board ) {
+		this.won = false;
+		this.turn = 0;
 		var tempArray = [];
 		for( var x = 0; x < board.widthBlocks; x++ ) {
 			tempArray[ x ] = [];
@@ -63,14 +72,26 @@ var Game = function() {
 		this.gameState = tempArray;
 	}
 	
-	this.addChip = function( zone, board ) {
+	this.addChip = function( zone, board, frontEnd ) {
+		console.log( frontEnd );
+	
 		var chipPlace = this.getEmpty( zone, board, game.gameState );									//this should be moved out of this function!
 		if( chipPlace !== false ) {																		//if the column isn't full
 			this.gameState[ zone ][ chipPlace ] = this.players[ this.getTurn() ].colour;
 			board.drawChip( zone, chipPlace, this.players[ this.getTurn() ].colour );
 			var longestLine = this.checkForWin( zone, chipPlace, board, this.players[ this.getTurn() ].colour, game.gameState );
 			if( longestLine >= this.numberToConnect ) {
-				console.log( 'game won by' + this.players[ this.getTurn() ].colour );
+				setTimeout(
+					function() {
+						//game.won = true;
+						frontEnd.setHeadline( 'game won by' + game.players[ game.getTurn() ].colour );
+						frontEnd.setButtons( frontEnd.buttonsTitleScreen );
+						frontEnd.bindButtons();
+						frontEnd.show();
+						//mainLoop();
+					}
+				, 500 );					//THIS NEEDS A PROPER DELAY TIME SET, because otherwise the gsme is declared as "won" before the piece drops to the bottom of the board
+				//console.log( 'game won by' + this.players[ this.getTurn() ].colour );
 				this.unbindClickZones();
 			} else {
 				this.incTurn();
@@ -82,6 +103,7 @@ var Game = function() {
 	}
 	
 	this.checkForWin = function( chipX, chipY, board, colour, gameState ) {
+		//console.info( frontEnd );
 		//to check for a line you need to check from x - ( numberToConnect - 1 ) to ( x + numberToconnect - 1 )
 		//this is all a bit whack
 		
@@ -251,7 +273,7 @@ var Board = function( ) {
 	this.paddingPx = 0;
 	this.blockPPS = 0;												//block movement in pixels per second. This has to be relative to the size of the board
 	
-	this.createBoard = function() {
+	this.create = function() {
 		$( 'body' ).append( '<div class="board"></div>' );
 	}
 	
@@ -279,7 +301,7 @@ var Board = function( ) {
 	}
 	
 	this.drawBoard = function() {
-		$( '.board' ).html( '' );
+		//$( '.board' ).html( '' );
 		$( '.board' ).css({
 			'width' : this.widthPx,
 			'height' : this.heightPx,
@@ -309,6 +331,7 @@ var Board = function( ) {
 	}
 	
 	this.drawGame = function( game ) {
+		$( '.chip' ).remove();
 		for( var x = 0; x < this.widthBlocks; x++ ) {
 			for( var y = 0; y < this.heightBlocks; y++ ) {
 				if( game.gameState[ x ][ y ] != 0 ) {
@@ -325,6 +348,10 @@ var Board = function( ) {
 			}
 		}
 	}
+	
+	this.clearChips = function() {
+		$( '.board .chip' ).remove();
+	}
 }
 
 var Player = function( colour, isComputer ) {
@@ -334,7 +361,7 @@ var Player = function( colour, isComputer ) {
 	this.compTurnDelayRandom = 1100;																//add a random amount on top
 	
 	//the below methods are for computer AI moves
-	this.randomMove = function( board, game ) {														
+	this.randomMove = function( board, game, frontEnd ) {											console.log( 'random move: ' + frontEnd );
 		var myMove = Math.round( Math.random() * ( board.widthBlocks - 1 ) );
 		var chipPlace = game.getEmpty( myMove, board, game.gameState );
 		
@@ -350,11 +377,11 @@ var Player = function( colour, isComputer ) {
 		}
 	
 		setTimeout( function() {																	//but don't do it instantly - add a delay as "thinking" time
-			game.addChip( myMove, board );
+			game.addChip( myMove, board, frontEnd );
 		}, this.getThinkingTime() );
 	}
 	
-	this.calculatedMove = function( board, game) {													
+	this.calculatedMove = function( board, game, frontEnd ) {										console.log( 'calc move: ' + frontEnd );
 		//worst. code. ever.
 		var enemyThisPosition = false;
 		for( var w = 0; w < board.widthBlocks; w ++ )	{											//check the player's moves, and that they're not able to join four in next turn - if so, block
@@ -370,23 +397,23 @@ var Player = function( colour, isComputer ) {
 				}
 			} else {
 				console.log( nextTurnColour + ' enemy potential line of 0' );
-			}																					
-																									//I ought to add a check for comp opportunities to win at some point
+			}																																										//I ought to add a check for comp opportunities to win at some point
 		}																						
 																								
 		if( enemyThisPosition !== false )	{
 			setTimeout( function() {																	//but don't do it instantly - add a delay as "thinking" time
-				game.addChip( enemyThisPosition, board );
+				game.addChip( enemyThisPosition, board, frontEnd );
 			}, this.getThinkingTime() );
 		} else {
-			this.randomMove( board, game );	
+			this.randomMove( board, game, frontEnd );	
 		}
 	}
-	this.makeMove = function( board, game ) {													
+	this.makeMove = function( board, game, frontEnd ) {
+		console.log( 'makeMove(): ' + frontEnd );
 		if( game.turn == 0 || game.turn == 1 ) {												//first move is random
-			this.randomMove( board, game );
+			this.randomMove( board, game, frontEnd );
 		} else {
-			this.calculatedMove( board, game );
+			this.calculatedMove( board, game, frontEnd );
 		}
 	};
 	
@@ -394,6 +421,138 @@ var Player = function( colour, isComputer ) {
 		return Math.round( ( Math.random() * this.compTurnDelayRandom ) + this.compTurnDelay );
 	};
 }
+
+var FrontEnd = function() {
+	this.create = function() {
+		$( 'body' ).prepend( '<div class="overlay" id="frontEnd"></div>' );
+	}
+	
+	this.show = function() {
+		$( '#frontEnd' ).fadeIn();
+	}
+	
+	this.hide = function() {
+		$( '#frontEnd' ).fadeOut();	
+	}
+	
+	this.setHeadline = function( headlineText ) {
+		$( '#frontEnd h1' ).remove();
+		$( '#frontEnd' ).prepend( '<h1>' + headlineText + '</h1>' );
+	}
+	
+	this.setButtons = function( buttonsArray ) {
+		$( '#frontEnd .button' ).remove();
+		for( var h = 0; h < buttonsArray.length; h++ ) {
+			$( '#frontEnd' ).append( '<a class="button" id="' + buttonsArray[ h ][ 1 ] + '">' + buttonsArray[ h ][ 0 ] + '</a>' );
+		}
+	}
+	
+	this.bindButtons = function() {
+		$( '#singlePlayer' ).on( 'tap', function() {
+			console.log( 'single player button clicked' );
+			frontEnd.hide();
+			game.initGameState( board );
+			board.clearChips();
+			mainLoop();
+		} );
+	}
+	
+	this.buttonsTitleScreen = [
+		[ '1 Player', 'singlePlayer' ],
+		[ '2 Player', 'twoPlayer' ]
+	];
+	
+	this.buttonsGameOverSinglePlayer = [
+		[ 'play again against comp', 'singlePlayer' ],
+		[ 'play again against human', 'twoPlayer' ]
+	];
+	
+	this.buttonsGameOverTwoPlayer = [
+		[ 'play again against human', 'twoPlayer' ],
+		[ 'play again against comp', 'singlePlayer' ]
+	];
+	
+	
+}
+
+//here is the game
+var frontEnd = new FrontEnd();
+var board = new Board();
+var game = new Game();
+
+frontEnd.create();
+frontEnd.setHeadline( 'Join Four' );
+frontEnd.setButtons( frontEnd.buttonsTitleScreen );
+frontEnd.bindButtons(  );
+
+function drawGame() {
+	var viewport = getViewport();
+	board.create();
+	board.calculateDimensions( viewport );
+	board.drawBoard();
+	game.drawClickZones( board );
+	game.calcClickZonesCSS( board );
+}
+
+function redrawGame() {
+	var viewport = getViewport();
+	board.calculateDimensions( viewport );
+	board.drawBoard();
+	board.drawGame( game );
+	//board.drawGame( game );							//temp moved into "when window resizes" bit
+	
+	game.calcClickZonesCSS( board );
+	
+	if ( viewport.x < 480) {
+
+    }
+    
+    if ( viewport.x > 480) {
+        
+    }
+    
+    if ( viewport.x >= 768) {
+    
+    }
+    
+    if ( viewport.x > 1030) {
+
+    }
+}
+
+function mainLoop() {
+	//if( !game.won ) {
+	//console.log( 'mainloop(): turn ' + game.turn );
+	if( game.checkTurnsAreLeft( board ) ) {
+		if( !game.players[ game.getTurn() ].isComputer ) {
+			game.bindClickZones( board, game, frontEnd );
+		} else {
+			//console.log( 'computer turn' );
+			console.log( 'mainloop: frontend: ' + frontEnd );
+			game.unbindClickZones();
+			game.players[ game.getTurn() ].makeMove( board, game, frontEnd );
+		}
+	} else {
+		game.unbindClickZones();
+		console.log( 'no turns left - draw' );
+	}
+	/*} else {
+		console.log( 'game won, so do nothing' );
+	}*/
+}
+
+jQuery(document).ready(function($) {
+	drawGame();
+	
+    //mainLoop();
+	$( window ).smartresize(function(){
+		console.log( 'resized' );
+		redrawGame();
+//	    mainLoop();
+ 	});
+});
+
+//couple of helper functions
 
 function getViewport() {
 	var viewport = {
@@ -414,59 +573,3 @@ function copyArray( arrayToBeCopied ) {
 	}
 	return newArray;
 }
-
-var board = new Board();
-var game = new Game();
-
-game.initGameState( board );
-board.createBoard();
-
-function redrawGame() {
-	var viewport = getViewport();
-	board.calculateDimensions( viewport );
-	board.drawBoard();
-	board.drawGame( game );
-	
-	game.drawClickZones( board );
-	
-	if ( viewport.x < 480) {
-
-    }
-    
-    if ( viewport.x > 480) {
-        
-    }
-    
-    if ( viewport.x >= 768) {
-    
-    }
-    
-    if ( viewport.x > 1030) {
-
-    }
-}
-
-function mainLoop() {
-	if( game.checkTurnsAreLeft( board ) ) {
-		if( !game.players[ game.getTurn() ].isComputer ) {
-			game.bindClickZones( board, game );
-		} else {
-			console.log( 'computer turn' );
-			game.unbindClickZones();
-			game.players[ game.getTurn() ].makeMove( board, game );
-		}
-	} else {
-		game.unbindClickZones();
-		console.log( 'no turns left - draw' );
-	}
-}
-
-jQuery(document).ready(function($) {
-	redrawGame();
-    mainLoop();
-	$( window ).smartresize(function(){
-		console.log( 'resized' );
-		redrawGame();
-//	    mainLoop();
- 	});
-});

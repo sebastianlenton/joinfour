@@ -58,7 +58,7 @@
     <body>
 		<?php
 			include( 'parts/footerScripts.php' );
-			include( 'parts/diagnostic.php' );
+			//include( 'parts/diagnostic.php' );
 		?>
     </body>
 </html>
