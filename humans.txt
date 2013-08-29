@@ -2,7 +2,8 @@
 # The humans responsible & technology colophon
 
 # TEAM
-
+	
+	Seb Lenton - @sebastianlenton
     <name> -- <role> -- <twitter>
 
 # THANKS

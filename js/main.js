@@ -10,7 +10,7 @@ var Game = function() {
 	this.numberToConnect = 4;																	//so you could do connect X instead if you want
 	this.turn = 0;
 	this.gameState = [];
-	this.players = [ new Player( 'yellow', true ), new Player( 'red', false ) ];
+	this.players = [ new Player( 'red', false ), new Player( 'yellow', true ) ];
 	
 	this.incTurn = function() {
 		this.turn += 1;
@@ -84,8 +84,8 @@ var Game = function() {
 				setTimeout(
 					function() {
 						//game.won = true;
-						frontEnd.setHeadline( 'game won by' + game.players[ game.getTurn() ].colour );
-						frontEnd.setButtons( frontEnd.buttonsTitleScreen );
+						frontEnd.setHeadline( 'game won by ' + game.players[ game.getTurn() ].colour );
+						frontEnd.setButtons( frontEnd.buttonsGameOverSinglePlayer );
 						frontEnd.bindButtons();
 						frontEnd.show();
 						//mainLoop();
@@ -264,12 +264,12 @@ var Game = function() {
 }
 
 var Board = function( ) {
-	this.widthBlocks = 7;
+	this.widthBlocks = 6;
 	this.heightBlocks = 6;
 	this.blockWidth;
 	this.widthPx;
 	this.heightPx;
-	this.paddingPercent = 8;
+	this.paddingPercent = 20;										//I don't know why this is called paddingPercent as it's not a percentage
 	this.paddingPx = 0;
 	this.blockPPS = 0;												//block movement in pixels per second. This has to be relative to the size of the board
 	
@@ -399,7 +399,6 @@ var Player = function( colour, isComputer ) {
 				console.log( nextTurnColour + ' enemy potential line of 0' );
 			}																																										//I ought to add a check for comp opportunities to win at some point
 		}																						
-																								
 		if( enemyThisPosition !== false )	{
 			setTimeout( function() {																	//but don't do it instantly - add a delay as "thinking" time
 				game.addChip( enemyThisPosition, board, frontEnd );
@@ -521,34 +520,27 @@ function redrawGame() {
 }
 
 function mainLoop() {
-	//if( !game.won ) {
-	//console.log( 'mainloop(): turn ' + game.turn );
 	if( game.checkTurnsAreLeft( board ) ) {
 		if( !game.players[ game.getTurn() ].isComputer ) {
 			game.bindClickZones( board, game, frontEnd );
 		} else {
-			//console.log( 'computer turn' );
-			console.log( 'mainloop: frontend: ' + frontEnd );
 			game.unbindClickZones();
 			game.players[ game.getTurn() ].makeMove( board, game, frontEnd );
 		}
 	} else {
 		game.unbindClickZones();
-		console.log( 'no turns left - draw' );
+		frontEnd.setHeadline( 'draw!' );
+		frontEnd.setButtons( frontEnd.buttonsGameOverSinglePlayer );
+		frontEnd.bindButtons();
+		frontEnd.show();
 	}
-	/*} else {
-		console.log( 'game won, so do nothing' );
-	}*/
 }
 
 jQuery(document).ready(function($) {
 	drawGame();
 	
-    //mainLoop();
 	$( window ).smartresize(function(){
-		console.log( 'resized' );
 		redrawGame();
-//	    mainLoop();
  	});
 });
 

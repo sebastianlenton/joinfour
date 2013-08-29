@@ -722,7 +722,9 @@ body {
   width: 20px;
   height: 20px;
   background-color: #2f4556;
-  -webkit-border-radius: 8px; }
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px; }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003102}}
 .overlay {
