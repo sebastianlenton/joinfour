@@ -63,7 +63,6 @@ var Game = function() {
 	this.bindClickZones = function( board, game, frontEnd ) {								//this should really be in Board, I guess (so game logic and drawing are separate)
 		game.unbindClickZones();															//unbind them first (this is super hacky...)
 		$( '.clickZone' ).tap( function() {
-			console.log( 'clickzone' );
 			game.addChip( $( this ).data( 'id' ), board, frontEnd );
 		});
 	}
@@ -107,7 +106,7 @@ var Game = function() {
 				mainLoop();
 			}
 		} else {
-			console.log( 'this column is full' );
+			//console.log( 'this column is full' );
 		}
 	}
 	
@@ -355,7 +354,15 @@ var Board = function( ) {
 	}
 	
 	this.clearChips = function() {
-		$( '.board .chip' ).remove();
+		var distanceToFall = 250;			//arbitrary
+		var animTime = ( distanceToFall / ( this.blockPPS / 2 ) ) * 1000;
+	
+		$( '.chip' ).attr( 'id', '' );			//take off the ID, so chips during animation are completely disassociated from the game
+		$( '.chip' ).addClass( 'falling' );		//so we know which ones should be removed after the anim completes
+		$( '.chip' ).animate({
+			'top' : '+=' + distanceToFall,
+			'opacity' : 0
+		}, animTime, 'linear', function() { $( '.board .chip.falling' ).remove() });
 	}
 }
 
@@ -370,15 +377,9 @@ var Player = function( colour, isComputer ) {
 		var myMove = Math.round( Math.random() * ( board.widthBlocks - 1 ) );
 		var chipPlace = game.getEmpty( myMove, board, game.gameState );
 		
-		var tempAccumulate = 0;
-		
 		while( chipPlace === false ) {																//if the column is full, keep doing it
 			var myMove = Math.round( Math.random() * ( board.widthBlocks - 1 ) );
 			var chipPlace = game.getEmpty( myMove, board, game.gameState );
-			tempAccumulate++;
-			if( tempAccumulate > 50 ) {
-				console.log( 'no more room, everyone died' );
-			}
 		}
 	
 		setTimeout( function() {																	//but don't do it instantly - add a delay as "thinking" time
@@ -400,8 +401,6 @@ var Player = function( colour, isComputer ) {
 					enemyThisPosition = w;
 					break;
 				}
-			} else {
-				console.log( nextTurnColour + ' enemy potential line of 0' );
 			}																																										//I ought to add a check for comp opportunities to win at some point
 		}																						
 		if( enemyThisPosition !== false )	{
@@ -452,7 +451,6 @@ var FrontEnd = function() {
 	
 	this.bindButtons = function() {
 		$( '#singlePlayer' ).on( 'tap', function() {
-			console.log( 'single player' );
 			frontEnd.hide();
 			game.setPlayers( 1 );
 			game.initGameState( board );
@@ -534,7 +532,6 @@ function redrawGame() {
 function mainLoop() {
 	if( game.checkTurnsAreLeft( board ) ) {
 		if( !game.players[ game.getTurn() ].isComputer ) {
-			console.log( 'binding click zones for human player in mainLoop' );
 			game.bindClickZones( board, game, frontEnd );
 		} else {
 			game.unbindClickZones();
