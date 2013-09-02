@@ -2,10 +2,8 @@
 //todo:
 
 //do comp detect own potential to make a 4
-//should I do more thoughtful moves for comp (if there's no chance of winning/losing that turn) or just keep it as random?
+//block easy first turns win
 //front end CSS
-//activate 2 player mode
-//board emptying animation
 
 var Game = function() {
 	this.won = false;
@@ -13,7 +11,6 @@ var Game = function() {
 	this.turn = 0;
 	this.gameState = [];
 	this.players = [];
-	//this.players = [ new Player( 'red', false ), new Player( 'yellow', false ) ];
 	
 	this.setPlayers = function( howMany ) {
 		if( howMany == 1 ) {
@@ -105,15 +102,11 @@ var Game = function() {
 				this.incTurn();
 				mainLoop();
 			}
-		} else {
-			//console.log( 'this column is full' );
 		}
 	}
 	
 	this.checkForWin = function( chipX, chipY, board, colour, gameState ) {
 		//to check for a line you need to check from x - ( numberToConnect - 1 ) to ( x + numberToconnect - 1 )
-		//this is all a bit whack
-		
 		//checkHoriz
 		var startPoint = chipX - ( this.numberToConnect - 1 ),
 		endPoint = chipX + ( this.numberToConnect - 1 );
@@ -300,9 +293,7 @@ var Board = function( ) {
 		this.heightPx = this.heightBlocks * this.blockWidth;
 		this.widthPx = this.widthBlocks * this.blockWidth;
 		
-		//maybe PPS should be calculated elsewhere
-		this.blockPPS = Math.floor( this.heightPx * 2.5 );
-								//block movement in pixels per second. This has to be relative to the size of the board
+		this.blockPPS = Math.floor( this.heightPx * 2.5 );							//block movement in pixels per second. This has to be relative to the size of the board
 	}
 	
 	this.drawBoard = function() {
@@ -325,7 +316,6 @@ var Board = function( ) {
 		});
 		
 		var distanceToFall = ( y * this.blockWidth ) + this.paddingPx + this.blockWidth;
-		
 		var animTime = ( distanceToFall / this.blockPPS ) * 1000;
 		
 		$( '#game' + x + y ).animate({
@@ -346,7 +336,6 @@ var Board = function( ) {
 						'top' : this.blockWidth * y,
 						'left' : this.blockWidth * x,
 						'backgroundColor' : game.gameState[ x ][ y ]
-						
 					});
 				}
 			}
@@ -354,7 +343,7 @@ var Board = function( ) {
 	}
 	
 	this.clearChips = function() {
-		var distanceToFall = 250;			//arbitrary
+		var distanceToFall = 250;			//arbitrary ATM
 		var animTime = ( distanceToFall / ( this.blockPPS / 2 ) ) * 1000;
 	
 		$( '.chip' ).attr( 'id', '' );			//take off the ID, so chips during animation are completely disassociated from the game
@@ -388,7 +377,6 @@ var Player = function( colour, isComputer ) {
 	}
 	
 	this.calculatedMove = function( board, game, frontEnd ) {
-		//worst. code. ever.
 		var enemyThisPosition = false;
 		for( var w = 0; w < board.widthBlocks; w ++ )	{											//check the player's moves, and that they're not able to join four in next turn - if so, block
 			var tempGameState = copyArray( game.gameState );
@@ -401,7 +389,7 @@ var Player = function( colour, isComputer ) {
 					enemyThisPosition = w;
 					break;
 				}
-			}																																										//I ought to add a check for comp opportunities to win at some point
+			}																						//I ought to add a check for comp opportunities to win at some point
 		}																						
 		if( enemyThisPosition !== false )	{
 			setTimeout( function() {																	//but don't do it instantly - add a delay as "thinking" time
@@ -480,8 +468,6 @@ var FrontEnd = function() {
 		[ 'play again against human', 'twoPlayer' ],
 		[ 'play again against comp', 'singlePlayer' ]
 	];
-	
-	
 }
 
 //here is the game
