@@ -271,6 +271,7 @@ var Board = function( ) {
 	this.paddingPercent = 20;										//I don't know why this is called paddingPercent as it's not a percentage
 	this.paddingPx = 0;
 	this.blockPPS = 0;												//block movement in pixels per second. This has to be relative to the size of the board
+	this.top = 0;
 	
 	this.create = function() {
 		$( 'body' ).append( '<div class="board"></div>' );
@@ -283,7 +284,8 @@ var Board = function( ) {
 			if( ( this.blockWidth * this.widthBlocks ) > viewport.x ) {
 				this.blockWidth = Math.floor( ( viewport.x - ( this.paddingPx * 2 ) ) / this.widthBlocks );	
 			}
-		} else {	
+		} else {
+			console.log( 'vert' );
 			this.paddingPx = Math.floor( viewport.x / this.paddingPercent );
 			this.blockWidth = Math.floor( ( viewport.x - ( this.paddingPx * 2 ) ) / this.widthBlocks );
 			if( ( this.blockWidth * this.heightBlocks ) > viewport.y ) {
@@ -294,13 +296,14 @@ var Board = function( ) {
 		this.widthPx = this.widthBlocks * this.blockWidth;
 		
 		this.blockPPS = Math.floor( this.heightPx * 2.5 );							//block movement in pixels per second. This has to be relative to the size of the board
+		this.top = Math.floor( ( ( viewport.y / 2 ) - ( this.heightPx / 2 ) ) * .75 );			//sweetener
 	}
 	
 	this.drawBoard = function() {
 		$( '.board' ).css({
 			'width' : this.widthPx,
 			'height' : this.heightPx,
-			'top' : this.paddingPx
+			'top' : this.top
 		});
 	}
 	
@@ -494,7 +497,6 @@ function redrawGame() {
 	board.calculateDimensions( viewport );
 	board.drawBoard();
 	board.drawGame( game );
-
 	
 	game.calcClickZonesCSS( board );
 	
@@ -541,7 +543,6 @@ jQuery(document).ready(function($) {
 });
 
 //couple of helper functions
-
 function getViewport() {
 	var viewport = {
 		'x' : $(window).width(),
