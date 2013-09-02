@@ -3,7 +3,9 @@
 
 //do comp detect own potential to make a 4
 //should I do more thoughtful moves for comp (if there's no chance of winning/losing that turn) or just keep it as random?
-//front end
+//front end CSS
+//activate 2 player mode
+//board emptying animation
 
 var Game = function() {
 	this.won = false;
@@ -73,8 +75,6 @@ var Game = function() {
 	}
 	
 	this.addChip = function( zone, board, frontEnd ) {
-		console.log( frontEnd );
-	
 		var chipPlace = this.getEmpty( zone, board, game.gameState );									//this should be moved out of this function!
 		if( chipPlace !== false ) {																		//if the column isn't full
 			this.gameState[ zone ][ chipPlace ] = this.players[ this.getTurn() ].colour;
@@ -83,15 +83,12 @@ var Game = function() {
 			if( longestLine >= this.numberToConnect ) {
 				setTimeout(
 					function() {
-						//game.won = true;
 						frontEnd.setHeadline( 'game won by ' + game.players[ game.getTurn() ].colour );
 						frontEnd.setButtons( frontEnd.buttonsGameOverSinglePlayer );
 						frontEnd.bindButtons();
 						frontEnd.show();
-						//mainLoop();
 					}
 				, 500 );					//THIS NEEDS A PROPER DELAY TIME SET, because otherwise the gsme is declared as "won" before the piece drops to the bottom of the board
-				//console.log( 'game won by' + this.players[ this.getTurn() ].colour );
 				this.unbindClickZones();
 			} else {
 				this.incTurn();
@@ -103,7 +100,6 @@ var Game = function() {
 	}
 	
 	this.checkForWin = function( chipX, chipY, board, colour, gameState ) {
-		//console.info( frontEnd );
 		//to check for a line you need to check from x - ( numberToConnect - 1 ) to ( x + numberToconnect - 1 )
 		//this is all a bit whack
 		
@@ -249,7 +245,6 @@ var Game = function() {
 			}
 		}
 		
-		//console.log( 'line detected of ' + output );
 		return output;
 	}
 	
@@ -278,7 +273,6 @@ var Board = function( ) {
 	}
 	
 	this.calculateDimensions = function( viewport ) {
-		console.log( 'calcing dims' );
 		if( viewport.x >= viewport.y ) {
 			this.paddingPx = Math.floor( viewport.y / this.paddingPercent );
 			this.blockWidth = Math.floor( ( viewport.y - ( this.paddingPx * 2 ) ) / this.heightBlocks );
@@ -301,7 +295,6 @@ var Board = function( ) {
 	}
 	
 	this.drawBoard = function() {
-		//$( '.board' ).html( '' );
 		$( '.board' ).css({
 			'width' : this.widthPx,
 			'height' : this.heightPx,
@@ -361,7 +354,7 @@ var Player = function( colour, isComputer ) {
 	this.compTurnDelayRandom = 1100;																//add a random amount on top
 	
 	//the below methods are for computer AI moves
-	this.randomMove = function( board, game, frontEnd ) {											console.log( 'random move: ' + frontEnd );
+	this.randomMove = function( board, game, frontEnd ) {
 		var myMove = Math.round( Math.random() * ( board.widthBlocks - 1 ) );
 		var chipPlace = game.getEmpty( myMove, board, game.gameState );
 		
@@ -381,7 +374,7 @@ var Player = function( colour, isComputer ) {
 		}, this.getThinkingTime() );
 	}
 	
-	this.calculatedMove = function( board, game, frontEnd ) {										console.log( 'calc move: ' + frontEnd );
+	this.calculatedMove = function( board, game, frontEnd ) {
 		//worst. code. ever.
 		var enemyThisPosition = false;
 		for( var w = 0; w < board.widthBlocks; w ++ )	{											//check the player's moves, and that they're not able to join four in next turn - if so, block
@@ -408,7 +401,6 @@ var Player = function( colour, isComputer ) {
 		}
 	}
 	this.makeMove = function( board, game, frontEnd ) {
-		console.log( 'makeMove(): ' + frontEnd );
 		if( game.turn == 0 || game.turn == 1 ) {												//first move is random
 			this.randomMove( board, game, frontEnd );
 		} else {
@@ -448,7 +440,6 @@ var FrontEnd = function() {
 	
 	this.bindButtons = function() {
 		$( '#singlePlayer' ).on( 'tap', function() {
-			console.log( 'single player button clicked' );
 			frontEnd.hide();
 			game.initGameState( board );
 			board.clearChips();
@@ -498,7 +489,7 @@ function redrawGame() {
 	board.calculateDimensions( viewport );
 	board.drawBoard();
 	board.drawGame( game );
-	//board.drawGame( game );							//temp moved into "when window resizes" bit
+
 	
 	game.calcClickZonesCSS( board );
 	
