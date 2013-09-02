@@ -12,7 +12,18 @@ var Game = function() {
 	this.numberToConnect = 4;																	//so you could do connect X instead if you want
 	this.turn = 0;
 	this.gameState = [];
-	this.players = [ new Player( 'red', false ), new Player( 'yellow', true ) ];
+	this.players = [];
+	//this.players = [ new Player( 'red', false ), new Player( 'yellow', false ) ];
+	
+	this.setPlayers = function( howMany ) {
+		if( howMany == 1 ) {
+			this.players = [ new Player( 'red', false ), new Player( 'yellow', true ) ];
+		} else if( howMany == 2 ) {
+			this.players = [ new Player( 'red', false ), new Player( 'yellow', false ) ];
+		} else {
+			throw "More than two human players set in Game.setPlayers";
+		}
+	}
 	
 	this.incTurn = function() {
 		this.turn += 1;
@@ -50,6 +61,7 @@ var Game = function() {
 	}
 	
 	this.bindClickZones = function( board, game, frontEnd ) {								//this should really be in Board, I guess (so game logic and drawing are separate)
+		game.unbindClickZones();															//unbind them first (this is super hacky...)
 		$( '.clickZone' ).tap( function() {
 			console.log( 'clickzone' );
 			game.addChip( $( this ).data( 'id' ), board, frontEnd );
@@ -440,7 +452,16 @@ var FrontEnd = function() {
 	
 	this.bindButtons = function() {
 		$( '#singlePlayer' ).on( 'tap', function() {
+			console.log( 'single player' );
 			frontEnd.hide();
+			game.setPlayers( 1 );
+			game.initGameState( board );
+			board.clearChips();
+			mainLoop();
+		} );
+		$( '#twoPlayer' ).on( 'tap', function() {
+			frontEnd.hide();
+			game.setPlayers( 2 );
 			game.initGameState( board );
 			board.clearChips();
 			mainLoop();
@@ -513,6 +534,7 @@ function redrawGame() {
 function mainLoop() {
 	if( game.checkTurnsAreLeft( board ) ) {
 		if( !game.players[ game.getTurn() ].isComputer ) {
+			console.log( 'binding click zones for human player in mainLoop' );
 			game.bindClickZones( board, game, frontEnd );
 		} else {
 			game.unbindClickZones();
