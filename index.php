@@ -56,6 +56,9 @@
 		</script>
     </head>
     <body>
+    	<p class="hint">
+    	
+    	</p>
 		<?php
 			include( 'parts/footerScripts.php' );
 			//include( 'parts/diagnostic.php' );

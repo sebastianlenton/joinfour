@@ -416,6 +416,8 @@ var Player = function( colour, isComputer ) {
 }
 
 var FrontEnd = function() {
+	this.hintSelector = $( 'p.hint' );												//change this if the markup changes re hint
+
 	this.create = function() {
 		$( 'body' ).prepend( '<div class="overlay" id="frontEnd"></div>' );
 	}
@@ -425,7 +427,7 @@ var FrontEnd = function() {
 	}
 	
 	this.hide = function() {
-		$( '#frontEnd' ).fadeOut();	
+		$( '#frontEnd' ).fadeOut();
 	}
 	
 	this.setHeadline = function( headlineText ) {
@@ -438,6 +440,18 @@ var FrontEnd = function() {
 		for( var h = 0; h < buttonsArray.length; h++ ) {
 			$( '#frontEnd' ).append( '<a class="button" id="' + buttonsArray[ h ][ 1 ] + '">' + buttonsArray[ h ][ 0 ] + '</a>' );
 		}
+	}
+	
+	this.setHint = function( hint ) {
+		this.hintSelector.text( hint );
+	}
+	
+	this.showHint = function() {
+		this.hintSelector.fadeIn();
+	}
+	
+	this.hideHint = function() {
+		this.hintSelector.fadeOut();
 	}
 	
 	this.bindButtons = function() {
@@ -521,7 +535,9 @@ function mainLoop() {
 	if( game.checkTurnsAreLeft( board ) ) {
 		if( !game.players[ game.getTurn() ].isComputer ) {
 			game.bindClickZones( board, game, frontEnd );
+			frontEnd.setHint( 'Your turn' );
 		} else {
+			frontEnd.setHint( 'Computer\'s turn' );
 			game.unbindClickZones();
 			game.players[ game.getTurn() ].makeMove( board, game, frontEnd );
 		}
