@@ -739,24 +739,27 @@ body {
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003113}}
 p.hint {
-  background: pink;
   text-align: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   position: absolute;
-  width: 100%; }
+  width: 100%;
+  display: none;
+  color: #5e87a7;
+  font-weight: bold; }
 
 /*********************
 LINK STYLES
 *********************/
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003124}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003127}}
 a, a:visited {
   color: #ee0000;
   /* on hover */
   /* on click */
   /* mobile tap color */ }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003128}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003131}}
   a:hover, a:focus, a:visited:hover, a:visited:focus {
     color: #ff5555; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003138}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003141}}
   a:link, a:visited:link {
     /*
     this highlights links on ip5ones/iPads.
@@ -768,14 +771,14 @@ a, a:visited {
 /*********************
 TYPE
 *********************/
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003152}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003155}}
 body {
   font-size: 16px;
   line-height: 1.5;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background: #fbfbfa; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003159}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003162}}
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
   text-rendering: optimizelegibility;
   font-weight: 500;
@@ -785,11 +788,11 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
   */
   font-weight: bold; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003170}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003173}}
 h1, h2, h3, h4, h5, p, ul, ol, li, blockquote, hr {
   margin-top: 0; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003174}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003177}}
 h1, .h1 {
   font-size: 2.2em;
   text-align: center;
@@ -798,55 +801,55 @@ h1, .h1 {
   font-family: sans-serif;
   opacity: 0.99; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003183}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003186}}
 h2, .h2 {
   font-size: 1.45em;
   margin-bottom: 1.04em; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003188}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003191}}
 h3, .h3 {
   font-size: 1.15em;
   margin-bottom: 1.3em; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003193}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003196}}
 h4, .h4 {
   font-size: 1em;
   margin-bottom: 0.75em; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003198}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003201}}
 h5, .h5 {
   font-size: .9em;
   margin-bottom: 0; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003203}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003206}}
 p, li {
   font-family: "Georgia", Cambria, Times New Roman, Times, serif;
   font-size: 1em;
   margin-bottom: 1.5em; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003208}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003211}}
   p a, li a {
     font-weight: bold; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003213}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003216}}
 p.meta {
   font-size: 0.7em; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003217}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003220}}
 li {
   margin-right: 3em; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003221}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003224}}
 blockquote {
   margin-bottom: 1.5em; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003225}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003228}}
 .content {
   padding-bottom: 0.5em; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003227}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003230}}
   .content img {
     width: 100%;
     margin-bottom: 1.5em; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003232}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003235}}
   .content > p:first-of-type {
     font-style: italic;
     font-size: 1.25em;
@@ -879,7 +882,7 @@ BACKGROUNDS
 /*********************
 BUTTONS
 *********************/
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003286}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003289}}
 .button, .button:visited {
   padding: 0.76em 0.8em;
   display: inline-block;
@@ -889,7 +892,7 @@ BUTTONS
   cursor: pointer;
   background: #ff5555;
   color: white; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003297}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_base\.scss}line{font-family:\00003300}}
   .button:hover, .button:focus, .button:visited:hover, .button:visited:focus {
     background: #ff7e7e;
     color: white; }

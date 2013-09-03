@@ -11,11 +11,14 @@ var Game = function() {
 	this.turn = 0;
 	this.gameState = [];
 	this.players = [];
+	this.isTwoPlayer = false;
 	
 	this.setPlayers = function( howMany ) {
 		if( howMany == 1 ) {
+			this.isTwoPlayer = false;
 			this.players = [ new Player( 'red', false ), new Player( 'yellow', true ) ];
 		} else if( howMany == 2 ) {
+			this.isTwoPlayer = true;
 			this.players = [ new Player( 'red', false ), new Player( 'yellow', false ) ];
 		} else {
 			throw "More than two human players set in Game.setPlayers";
@@ -475,12 +478,16 @@ var FrontEnd = function() {
 		this.hintSelector.text( hint );
 	}
 	
-	this.showHint = function() {
-		this.hintSelector.fadeIn();
+	this.fadeInHint = function() {
+		this.hintSelector.fadeIn( 200 );
 	}
 	
 	this.hideHint = function() {
-		this.hintSelector.fadeOut();
+		this.hintSelector.hide();
+	}
+	
+	this.fadeOutHint = function() {
+		this.hintSelector.fadeOut( 200 );
 	}
 	
 	this.bindButtons = function() {
@@ -564,9 +571,18 @@ function mainLoop() {
 	if( game.checkTurnsAreLeft( board ) ) {
 		if( !game.players[ game.getTurn() ].isComputer ) {
 			game.bindClickZones( board, game, frontEnd );
-			frontEnd.setHint( 'Your turn' );
+			frontEnd.hideHint();
+			if( game.isTwoPlayer ) {
+				frontEnd.setHint( 'Player ' + ( game.getTurn() + 1 ) + '\'s turn' );
+			} else {
+				frontEnd.setHint( 'Your turn' );
+			}
+//			frontEnd.setHint( 'Your turn' );
+			frontEnd.fadeInHint();
 		} else {
+			frontEnd.hideHint();
 			frontEnd.setHint( 'Computer\'s turn' );
+			frontEnd.fadeInHint();
 			game.unbindClickZones();
 			game.players[ game.getTurn() ].makeMove( board, game, frontEnd );
 		}

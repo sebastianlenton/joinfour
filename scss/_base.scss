@@ -111,10 +111,13 @@ body {
 }
 
 p.hint {
-	background: pink;
 	text-align: center;
+	font-family:$sans-serif;
 	position: absolute;
 	width: 100%;
+	display:none;
+	color:lighten( $offBlack, 25% );
+	font-weight:bold;
 }
 
 /*********************
