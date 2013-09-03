@@ -395,16 +395,45 @@ var Player = function( colour, isComputer ) {
 			}																						//I ought to add a check for comp opportunities to win at some point
 		}																						
 		if( enemyThisPosition !== false )	{
-			setTimeout( function() {																	//but don't do it instantly - add a delay as "thinking" time
+			setTimeout( function() {																//but don't do it instantly - add a delay as "thinking" time
 				game.addChip( enemyThisPosition, board, frontEnd );
 			}, this.getThinkingTime() );
 		} else {
 			this.randomMove( board, game, frontEnd );	
 		}
 	}
+	
+	this.getOtherPlayersFirstMove = function( game, board ) {										//this is to do with blocking the ease of winning against the comp by making a line at the start
+		var boardLowestPoint = board.heightBlocks - 1;
+		var boardWidth = board.widthBlocks;
+		
+		for( var k = 0; k < boardWidth; k++ ) {
+			if( game.gameState[ k ][ boardLowestPoint ] != 0 ) {
+				return k;
+				break;
+			}
+		}
+	}
+	
+	this.moveNextTo = function( where, board ) {															//this is to do with blocking the ease of winning against the comp by making a line at the start
+		if( where == 0 ) {
+			return 1;
+		} else if( where >= board.widthBlocks - 1 ) {
+			return board.widthBlocks - 2;
+		} else {
+			return where + 1;
+		}
+	}
+	
 	this.makeMove = function( board, game, frontEnd ) {
-		if( game.turn == 0 || game.turn == 1 ) {												//first move is random
+		if( game.turn == 0 ) {
 			this.randomMove( board, game, frontEnd );
+		} else if( game.turn == 1 ) {
+			var enemyMove = this.getOtherPlayersFirstMove( game, board );
+			var myMove = this.moveNextTo( enemyMove, board );
+			setTimeout( function() {
+				game.addChip( myMove, board, frontEnd );
+			}, this.getThinkingTime() );
 		} else {
 			this.calculatedMove( board, game, frontEnd );
 		}
