@@ -28,6 +28,16 @@ h1 {
 	margin-bottom:0.5em;
 }
 
+p.footer {
+	margin-top:0;
+	position:relative;					//a hack to solve a clearing problem :(
+	top:2em;
+}
+
+p.hint {
+	top:0.5em;
+}
+
 /*********************
 HEADER STYLES
 *********************/

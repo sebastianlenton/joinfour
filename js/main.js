@@ -85,16 +85,18 @@ var Game = function() {
 	}
 	
 	this.addChip = function( zone, board, frontEnd ) {
+		//there's a LOT of code in here which should be elsewhere
 		var chipPlace = this.getEmpty( zone, board, game.gameState );									//this should be moved out of this function!
 		if( chipPlace !== false ) {																		//if the column isn't full
 			this.gameState[ zone ][ chipPlace ] = this.players[ this.getTurn() ].colour;
 			board.drawChip( zone, chipPlace, this.players[ this.getTurn() ].colour );
 			var longestLine = this.checkForWin( zone, chipPlace, board, this.players[ this.getTurn() ].colour, game.gameState );
 			if( longestLine >= this.numberToConnect ) {
-				setTimeout(																		//				:(
+				setTimeout(											//if someone's won
 					function() {
+						frontEnd.hideHint();
 						var frontEndText = '';
-						if( !game.isTwoPlayer ) {												//				:(
+						if( !game.isTwoPlayer ) {
 							if( game.players[ game.getTurn() ].colour == 'yellow' ) {
 								frontEndText = 'Computer Wins!';
 							} else if( game.players[ game.getTurn() ].colour == 'red' ) {
@@ -104,7 +106,7 @@ var Game = function() {
 							frontEnd.setButtons( frontEnd.buttonsGameOverSinglePlayer );
 							frontEnd.bindButtons();
 							frontEnd.show();
-						} else if( game.isTwoPlayer ) {											//				:(
+						} else if( game.isTwoPlayer ) {
 							if( game.players[ game.getTurn() ].colour == 'yellow' ) {
 								frontEndText = 'Player 2 ';
 							} else if( game.players[ game.getTurn() ].colour == 'red' ) {
@@ -471,6 +473,7 @@ var Player = function( colour, isComputer ) {
 var FrontEnd = function() {
 	this.opacity = 0.5;
 	this.hintSelector = $( 'p.hint' );												//change this if the markup changes re hint
+	this.link = '<p class="footer">a tiny game by <a target="_blank" href="http://www.sebastianlenton.com">Sebastian Lenton</a></p>';
 
 	this.create = function() {
 		$( 'body' ).prepend( '<div class="overlay" id="frontEnd"></div>' );
@@ -490,10 +493,12 @@ var FrontEnd = function() {
 	}
 	
 	this.setButtons = function( buttonsArray ) {
+		$( '#frontEnd .footer' ).remove();									//VERY hacky
 		$( '#frontEnd .button' ).remove();
 		for( var h = 0; h < buttonsArray.length; h++ ) {
 			$( '#frontEnd' ).append( '<a class="button" id="' + buttonsArray[ h ][ 1 ] + '">' + buttonsArray[ h ][ 0 ] + '</a>' );
 		}
+		$( '#frontEnd' ).append( this.link );				//a terrible hack due to a prob I was having re absolute bottom 0
 	}
 	
 	this.setHint = function( hint ) {

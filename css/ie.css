@@ -116,6 +116,16 @@ h1 {
   font-size: 1.9em;
   margin-bottom: 0.5em; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_480up\.scss}line{font-family:\0000331}}
+p.footer {
+  margin-top: 0;
+  position: relative;
+  top: 2em; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_480up\.scss}line{font-family:\0000337}}
+p.hint {
+  top: 0.5em; }
+
 /*********************
 HEADER STYLES
 *********************/
@@ -125,7 +135,7 @@ LOGO STYLES
 /*********************
 BUTTON STYLES
 *********************/
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_480up\.scss}line{font-family:\0000347}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_480up\.scss}line{font-family:\0000357}}
 .button, .button:visited {
   width: 48%;
   margin: 0 1%;

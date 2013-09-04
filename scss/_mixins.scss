@@ -40,6 +40,7 @@ $offBlack:			#2f4556;
 $white:             #fff;
 $offWhite:			#fbfbfa;
 $red:				#ff5555;
+$blue:				#1384bc;
 $redTrans80:		rgba( 255, 85, 85, 0.8 );
 $blackTrans75:		rgba( 0, 0, 0, 0.6 );
 $blackTrans40:		rgba( 0, 0, 0, 0.4 );
@@ -60,7 +61,7 @@ $background:		$offWhite;
 $hr:				$red;
 
 $text:				$offBlack;
-$link-color:		darken( $red, 20% );
+$link-color:		$red;
 $link-hover:		$red;
 
 $selection:			$red;
@@ -68,7 +69,6 @@ $selection-text:	$white;
 
 $buttonBg:			$red;
 $button-link:		$white;
-$buttonBg-hover:	lighten( $red, 8% );
 $button-link-hover:	lighten( $white, 8% );
 
 /*********************

@@ -1,3 +1,3 @@
-A boilerplate I use for starting sites (static).
+A small Connect Four-style game.
 
 By Seb. http://www.sebastianlenton.com

@@ -114,13 +114,19 @@ body {
 p.hint {
 	text-align: center;
 	font-family:$sans-serif;
+	font-weight:bold;
+	color:$offBlack;
 	position: absolute;
 	z-index:999;
 	opacity:0;
 	width: 100%;
-	margin-top:0.5em;
-	color:$offBlack;
-	font-weight:bold;
+	margin-top:0.3em;
+}
+
+.footer {
+	text-align:center;
+	margin-top:1.5em;
+	font-size:90%;
 }
 
 /*********************
@@ -147,7 +153,7 @@ a, a:visited {
 		so it basically works like the :hover selector
 		for mobile devices.
 		*/
-		-webkit-tap-highlight-color : rgba( 255, 0, 0, 1 );				//and I don't think this is very relevant to what I'm doing now.
+		-webkit-tap-highlight-color : rgba( 255, 0, 0, 0.5 );
 	}
 }
 
@@ -207,7 +213,6 @@ h5,.h5 {
 }
 
 p, li {
-	font-family:$serif;
 	font-size:1em;
 	margin-bottom:1.5em;
 	
@@ -307,11 +312,19 @@ BUTTONS
 	color:$button-link;
 
 	&:hover, &:focus {
-		background:$buttonBg-hover;
+		background:lighten( $red, 8% );
 		color:$button-link-hover;
 	}
 
 	&:active {
 		//@include css-gradient(darken($link-color, 5%), $link-color);
+	}
+	
+	&#twoPlayer {
+		background:$blue;
+		
+		&:hover, &:focus {
+			background:lighten( $blue, 8% );
+		}
 	}
 }
