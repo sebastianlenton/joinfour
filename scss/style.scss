@@ -102,14 +102,14 @@ This is for the larger monitors and possibly full screen viewers.
 @media only screen and (min-width: 97.5em) {
 
 	// styles in 1240up.scss
-	@import "1560up";
+	//@import "1560up";
 
 }
 
 @media only screen and (min-width: 132em) {
 
 	// styles in 1240up.scss
-	@import "2160up";
+	//@import "2160up";
 
 }
 

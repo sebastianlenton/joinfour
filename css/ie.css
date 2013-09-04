@@ -117,12 +117,6 @@ h1 {
   margin-bottom: 0.5em; }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_480up\.scss}line{font-family:\0000331}}
-p.footer {
-  margin-top: 0;
-  position: relative;
-  top: 2em; }
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_480up\.scss}line{font-family:\0000337}}
 p.hint {
   top: 0.5em; }
 
@@ -135,12 +129,11 @@ LOGO STYLES
 /*********************
 BUTTON STYLES
 *********************/
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_480up\.scss}line{font-family:\0000357}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_480up\.scss}line{font-family:\0000351}}
 .button, .button:visited {
   width: 48%;
   margin: 0 1%;
-  font-size: 90%;
-  float: left; }
+  font-size: 90%; }
 
 /*********************
 NAVIGATION STYLES
@@ -151,6 +144,10 @@ SIDEBARS & ASIDES
 /*********************
 FOOTER STYLES
 *********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_480up\.scss}line{font-family:\0000374}}
+.footer {
+  margin-top: 1.5em; }
+
 /*********************
 TRANSITIONS
 *********************/
@@ -174,6 +171,10 @@ TYPE
 body {
   font-size: 22px; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_768up\.scss}line{font-family:\0000328}}
+p.hint {
+  top: 1.5em; }
+
 /*********************
 HEADER STYLES
 *********************/
@@ -208,6 +209,10 @@ LAYOUT & GRID STYLES
 /*********************
 TYPE
 *********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_1024up\.scss}line{font-family:\0000324}}
+body {
+  font-size: 25px; }
+
 /*********************
 HEADER STYLES
 *********************/

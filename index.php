@@ -7,9 +7,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Join Four</title>
-        <meta name="description" content="">
-        
-<!--		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+        <meta name="description" content="A simple Connect Four-style game, for one or two players">
         
 		<meta name="viewport" content="width=device-width, initial-scale=1,  maximum-scale=1">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -61,7 +59,6 @@
     	</p>
 		<?php
 			include( 'parts/footerScripts.php' );
-			//include( 'parts/diagnostic.php' );
 		?>
     </body>
 </html>

@@ -471,12 +471,12 @@ var Player = function( colour, isComputer ) {
 }
 
 var FrontEnd = function() {
-	this.opacity = 0.5;
+	this.opacity = 0.4;
 	this.hintSelector = $( 'p.hint' );												//change this if the markup changes re hint
 	this.link = '<p class="footer">a tiny game by <a target="_blank" href="http://www.sebastianlenton.com">Sebastian Lenton</a></p>';
 
 	this.create = function() {
-		$( 'body' ).prepend( '<div class="overlay" id="frontEnd"></div>' );
+		$( 'body' ).prepend( '<div class="overlay" id="frontEnd"><h1></h1><div id="buttons"></div><div id="footer">' + this.link + '</div></div>' );
 	}
 	
 	this.show = function() {
@@ -488,17 +488,14 @@ var FrontEnd = function() {
 	}
 	
 	this.setHeadline = function( headlineText ) {
-		$( '#frontEnd h1' ).remove();
-		$( '#frontEnd' ).prepend( '<h1>' + headlineText + '</h1>' );
+		$( '#frontEnd h1' ).text(  headlineText );
 	}
 	
 	this.setButtons = function( buttonsArray ) {
-		$( '#frontEnd .footer' ).remove();									//VERY hacky
 		$( '#frontEnd .button' ).remove();
 		for( var h = 0; h < buttonsArray.length; h++ ) {
-			$( '#frontEnd' ).append( '<a class="button" id="' + buttonsArray[ h ][ 1 ] + '">' + buttonsArray[ h ][ 0 ] + '</a>' );
+			$( '#frontEnd #buttons' ).append( '<a class="button" id="' + buttonsArray[ h ][ 1 ] + '">' + buttonsArray[ h ][ 0 ] + '</a>' );
 		}
-		$( '#frontEnd' ).append( this.link );				//a terrible hack due to a prob I was having re absolute bottom 0
 	}
 	
 	this.setHint = function( hint ) {

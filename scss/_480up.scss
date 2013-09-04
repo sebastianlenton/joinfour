@@ -28,12 +28,6 @@ h1 {
 	margin-bottom:0.5em;
 }
 
-p.footer {
-	margin-top:0;
-	position:relative;					//a hack to solve a clearing problem :(
-	top:2em;
-}
-
 p.hint {
 	top:0.5em;
 }
@@ -54,11 +48,10 @@ BUTTON STYLES
 *********************/
 
 
-.button, .button:visited {				//you need to do/test 480
+.button, .button:visited {
 	width:48%;
 	margin:0 1%;
 	font-size:90%;
-	float:left;
 }
 
 
@@ -78,7 +71,9 @@ SIDEBARS & ASIDES
 FOOTER STYLES
 *********************/
 
-
+.footer {
+	margin-top:1.5em;
+}
 	
 /*********************
 TRANSITIONS

@@ -123,11 +123,7 @@ p.hint {
 	margin-top:0.3em;
 }
 
-.footer {
-	text-align:center;
-	margin-top:1.5em;
-	font-size:90%;
-}
+
 
 /*********************
 LINK STYLES
@@ -278,7 +274,11 @@ IMAGES
 FOOTER STYLES
 *********************/
 
-
+.footer {
+	text-align:center;
+	margin-top:2.5em;
+	font-size:90%;
+}
 	
 /*********************
 TRANSITIONS & ANIMATIONS
@@ -296,7 +296,7 @@ BUTTONS
 
 .button, .button:visited {
 	width:100%;
-	padding:0.76em 0 0.94em 0;									//don't need side padding for now
+	padding:0.76em 0 0.94em 0;
 	margin-bottom:1.2em;
 	
 	display: inline-block;
@@ -317,7 +317,6 @@ BUTTONS
 	}
 
 	&:active {
-		//@include css-gradient(darken($link-color, 5%), $link-color);
 	}
 	
 	&#twoPlayer {

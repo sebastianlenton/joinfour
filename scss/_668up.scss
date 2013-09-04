@@ -16,7 +16,17 @@ GENERAL STYLES
 LAYOUT & GRID STYLES
 *********************/
 
+.overlay {
+	padding-top:5em;	
+}
 
+#buttons {
+	.button {
+		width:18em;
+		margin:0 auto 1em auto;
+		display:block;
+	}
+}
 
 /*********************
 TYPE
@@ -24,6 +34,10 @@ TYPE
 
 body {
 	font-size:20px;
+}
+
+h1 {
+	font-size:2.5em;
 }
 
 /*********************
