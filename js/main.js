@@ -418,14 +418,33 @@ var Player = function( colour, isComputer ) {
 					enemyThisPosition = w;
 					break;
 				}
-			}																						//I ought to add a check for comp opportunities to win at some point
-		}																						
-		if( enemyThisPosition !== false )	{
+			}						
+		}								
+		if( enemyThisPosition !== false ) {
 			setTimeout( function() {																//but don't do it instantly - add a delay as "thinking" time
 				game.addChip( enemyThisPosition, board, frontEnd );
 			}, this.getThinkingTime() );
 		} else {
-			this.randomMove( board, game, frontEnd );	
+			var winningPosition = false;
+			for( var w = 0; w < board.widthBlocks; w ++ )	{											//check there's no winning move
+				var tempGameState = copyArray( game.gameState );
+				var chipPlace = game.getEmpty( w, board, game.gameState );
+				if( chipPlace !== false ) {																//if the column isn't full
+					var myColour = game.players[ game.getTurn() ].colour;
+					tempGameState[ w ][ chipPlace ] = myColour;
+					if( game.checkForWin( w, chipPlace, board, myColour, tempGameState ) == game.numberToConnect ) {
+						winningPosition = w;
+						break;
+					}
+				}
+			}
+			if( winningPosition !== false )	{
+				setTimeout( function() {																//but don't do it instantly - add a delay as "thinking" time
+					game.addChip( winningPosition, board, frontEnd );
+				}, this.getThinkingTime() );
+			} else {
+				this.randomMove( board, game, frontEnd );
+			}
 		}
 	}
 	
