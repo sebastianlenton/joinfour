@@ -1,0 +1,15 @@
+{
+  "name": "Join Four",
+  "description": "A simple Connect Four-style game, for one or two players",
+  "launch_path": "/",
+  "icons": {
+    "128": "/img/icon128.png",
+    "60": "/img/icon60.png",
+    "30": "/img/icon30.png"
+  },
+  "developer": {
+    "name": "Sebastian Lenton",
+    "url": "http://joinfour.sebastianlenton.com"
+  },
+  "default_locale": "en"
+}
