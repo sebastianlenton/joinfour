@@ -10,7 +10,8 @@ Stylesheet:
 GENERAL STYLES
 *********************/
 
-
+.overlay {
+}
 
 /*********************
 LAYOUT & GRID STYLES
@@ -22,7 +23,10 @@ LAYOUT & GRID STYLES
 TYPE
 *********************/
 
-
+h1 {
+	font-size:1.9em;
+	margin-bottom:0.5em;
+}
 
 /*********************
 HEADER STYLES
@@ -34,6 +38,18 @@ HEADER STYLES
 LOGO STYLES
 *********************/
 
+
+/*********************
+BUTTON STYLES
+*********************/
+
+
+.button, .button:visited {				//you need to do/test 480
+	width:48%;
+	margin:0 1%;
+	font-size:90%;
+	float:left;
+}
 
 
 /*********************

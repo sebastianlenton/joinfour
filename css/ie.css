@@ -65,20 +65,20 @@ TYPOGRAPHY
 use the best ampersand
 http://simplebits.com/notebook/2008/08/14/ampersands-2/
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_mixins\.scss}line{font-family:\0000383}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_mixins\.scss}line{font-family:\0000385}}
 span.amp {
   font-family: Baskerville, "" Libre Baskerville " Old Style", Palatino, "Book Antiqua", serif !important;
   font-style: italic; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_mixins\.scss}line{font-family:\0000390}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_mixins\.scss}line{font-family:\0000392}}
 .text-left {
   text-align: left; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_mixins\.scss}line{font-family:\0000391}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_mixins\.scss}line{font-family:\0000393}}
 .text-center {
   text-align: center; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_mixins\.scss}line{font-family:\0000392}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_mixins\.scss}line{font-family:\0000394}}
 .text-right {
   text-align: right; }
 
@@ -111,12 +111,27 @@ LAYOUT & GRID STYLES
 /*********************
 TYPE
 *********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_480up\.scss}line{font-family:\0000326}}
+h1 {
+  font-size: 1.9em;
+  margin-bottom: 0.5em; }
+
 /*********************
 HEADER STYLES
 *********************/
 /*********************
 LOGO STYLES
 *********************/
+/*********************
+BUTTON STYLES
+*********************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sebastianlenton\/sites\/joinfour\/scss\/_480up\.scss}line{font-family:\0000347}}
+.button, .button:visited {
+  width: 48%;
+  margin: 0 1%;
+  font-size: 90%;
+  float: left; }
+
 /*********************
 NAVIGATION STYLES
 *********************/

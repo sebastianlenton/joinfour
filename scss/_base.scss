@@ -108,15 +108,18 @@ body {
 	position:fixed;
 	top:0;
 	z-index:1000;
+	padding:1em;
 }
 
 p.hint {
 	text-align: center;
 	font-family:$sans-serif;
 	position: absolute;
+	z-index:999;
+	opacity:0;
 	width: 100%;
-	display:none;
-	color:lighten( $offBlack, 25% );
+	margin-top:0.5em;
+	color:$offBlack;
 	font-weight:bold;
 }
 
@@ -175,7 +178,7 @@ h1,h2,h3,h4,h5,p,ul,ol,li,blockquote,hr {
 }
 
 h1, .h1 {
-	font-size:2.2em;
+	font-size:2em;
 	text-align: center;
 	margin:0 0 .685em 0;
 	line-height:1.37em;
@@ -287,11 +290,17 @@ BUTTONS
 *********************/
 
 .button, .button:visited {
-	padding:0.76em  0.8em;
+	width:100%;
+	padding:0.76em 0 0.94em 0;									//don't need side padding for now
+	margin-bottom:1.2em;
+	
 	display: inline-block;
 	font-weight: bold;
+	
 	text-decoration: none;
 	text-align:center;
+	
+		text-shadow:0 2px 0 $blackTrans40;
 
 	cursor: pointer;
 	background:$buttonBg;

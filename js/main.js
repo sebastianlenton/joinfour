@@ -2,7 +2,6 @@
 //todo:
 
 //do comp detect own potential to make a 4
-//block easy first turns win
 //front end CSS
 
 var Game = function() {
@@ -92,12 +91,32 @@ var Game = function() {
 			board.drawChip( zone, chipPlace, this.players[ this.getTurn() ].colour );
 			var longestLine = this.checkForWin( zone, chipPlace, board, this.players[ this.getTurn() ].colour, game.gameState );
 			if( longestLine >= this.numberToConnect ) {
-				setTimeout(
+				setTimeout(																		//				:(
 					function() {
-						frontEnd.setHeadline( 'game won by ' + game.players[ game.getTurn() ].colour );
-						frontEnd.setButtons( frontEnd.buttonsGameOverSinglePlayer );
-						frontEnd.bindButtons();
-						frontEnd.show();
+						var frontEndText = '';
+						if( !game.isTwoPlayer ) {												//				:(
+							if( game.players[ game.getTurn() ].colour == 'yellow' ) {
+								frontEndText = 'Computer Wins!';
+							} else if( game.players[ game.getTurn() ].colour == 'red' ) {
+								frontEndText = 'You Win!';
+							}
+							frontEnd.setHeadline( frontEndText );
+							frontEnd.setButtons( frontEnd.buttonsGameOverSinglePlayer );
+							frontEnd.bindButtons();
+							frontEnd.show();
+						} else if( game.isTwoPlayer ) {											//				:(
+							if( game.players[ game.getTurn() ].colour == 'yellow' ) {
+								frontEndText = 'Player 2 ';
+							} else if( game.players[ game.getTurn() ].colour == 'red' ) {
+								frontEndText = 'Player 1 ';
+							}
+							frontEnd.setHeadline( frontEndText + 'Wins!' );
+							frontEnd.setButtons( frontEnd.buttonsGameOverTwoPlayer );
+							frontEnd.bindButtons();
+							frontEnd.show();
+						} else {
+							throw "game.isTwoPlayer set to a bad value";
+						}
 					}
 				, 500 );					//THIS NEEDS A PROPER DELAY TIME SET, because otherwise the gsme is declared as "won" before the piece drops to the bottom of the board
 				this.unbindClickZones();
@@ -288,7 +307,6 @@ var Board = function( ) {
 				this.blockWidth = Math.floor( ( viewport.x - ( this.paddingPx * 2 ) ) / this.widthBlocks );	
 			}
 		} else {
-			console.log( 'vert' );
 			this.paddingPx = Math.floor( viewport.x / this.paddingPercent );
 			this.blockWidth = Math.floor( ( viewport.x - ( this.paddingPx * 2 ) ) / this.widthBlocks );
 			if( ( this.blockWidth * this.heightBlocks ) > viewport.y ) {
@@ -331,18 +349,20 @@ var Board = function( ) {
 	}
 	
 	this.drawGame = function( game ) {
-		$( '.chip' ).remove();
-		for( var x = 0; x < this.widthBlocks; x++ ) {
-			for( var y = 0; y < this.heightBlocks; y++ ) {
-				if( game.gameState[ x ][ y ] != 0 ) {
-					$( '.board' ).prepend( '<div class="chip" id="game' + x + y + '"></div>' );	
-					$( '#game' + x + y  ).css({
-						'width' : this.blockWidth,
-						'height' : this.blockWidth,
-						'top' : this.blockWidth * y,
-						'left' : this.blockWidth * x,
-						'backgroundColor' : game.gameState[ x ][ y ]
-					});
+		if( game.gameState.length > 0 ) {
+			$( '.chip' ).remove();
+			for( var x = 0; x < this.widthBlocks; x++ ) {
+				for( var y = 0; y < this.heightBlocks; y++ ) {
+					if( game.gameState[ x ][ y ] != 0 ) {
+						$( '.board' ).prepend( '<div class="chip" id="game' + x + y + '"></div>' );	
+						$( '#game' + x + y  ).css({
+							'width' : this.blockWidth,
+							'height' : this.blockWidth,
+							'top' : this.blockWidth * y,
+							'left' : this.blockWidth * x,
+							'backgroundColor' : game.gameState[ x ][ y ]
+						});
+					}
 				}
 			}
 		}
@@ -364,8 +384,9 @@ var Board = function( ) {
 var Player = function( colour, isComputer ) {
 	this.colour = colour;
 	this.isComputer = isComputer;
-	this.compTurnDelay = 300;																		//add a minimum of computer "thinking" time
-	this.compTurnDelayRandom = 1100;																//add a random amount on top
+	//add a minimum of computer "thinking" time
+	this.compTurnDelay =450;
+	this.compTurnDelayRandom = 1000;
 	
 	//the below methods are for computer AI moves
 	this.randomMove = function( board, game, frontEnd ) {
@@ -448,6 +469,7 @@ var Player = function( colour, isComputer ) {
 }
 
 var FrontEnd = function() {
+	this.opacity = 0.5;
 	this.hintSelector = $( 'p.hint' );												//change this if the markup changes re hint
 
 	this.create = function() {
@@ -479,11 +501,13 @@ var FrontEnd = function() {
 	}
 	
 	this.fadeInHint = function() {
-		this.hintSelector.fadeIn( 200 );
+		this.hintSelector.animate({
+			'opacity' : this.opacity
+		} );
 	}
 	
 	this.hideHint = function() {
-		this.hintSelector.hide();
+		this.hintSelector.css( 'opacity', 0 );
 	}
 	
 	this.fadeOutHint = function() {
@@ -508,18 +532,18 @@ var FrontEnd = function() {
 	}
 	
 	this.buttonsTitleScreen = [
-		[ '1 Player', 'singlePlayer' ],
-		[ '2 Player', 'twoPlayer' ]
+		[ '1 Player (against computer)', 'singlePlayer' ],
+		[ '2 Player (take turns)', 'twoPlayer' ]
 	];
 	
 	this.buttonsGameOverSinglePlayer = [
-		[ 'play again against comp', 'singlePlayer' ],
-		[ 'play again against human', 'twoPlayer' ]
+		[ 'play against computer again', 'singlePlayer' ],
+		[ 'try two player mode', 'twoPlayer' ]
 	];
 	
 	this.buttonsGameOverTwoPlayer = [
-		[ 'play again against human', 'twoPlayer' ],
-		[ 'play again against comp', 'singlePlayer' ]
+		[ 'another two player game?', 'twoPlayer' ],
+		[ 'play single player', 'singlePlayer' ]
 	];
 }
 
@@ -573,11 +597,10 @@ function mainLoop() {
 			game.bindClickZones( board, game, frontEnd );
 			frontEnd.hideHint();
 			if( game.isTwoPlayer ) {
-				frontEnd.setHint( 'Player ' + ( game.getTurn() + 1 ) + '\'s turn' );
+				frontEnd.setHint( 'Player ' + ( game.getTurn() + 1 ) + '\'s turn (select where to place)' );
 			} else {
-				frontEnd.setHint( 'Your turn' );
+				frontEnd.setHint( 'Your turn (select where to place)' );
 			}
-//			frontEnd.setHint( 'Your turn' );
 			frontEnd.fadeInHint();
 		} else {
 			frontEnd.hideHint();
@@ -588,7 +611,7 @@ function mainLoop() {
 		}
 	} else {
 		game.unbindClickZones();
-		frontEnd.setHeadline( 'draw!' );
+		frontEnd.setHeadline( 'It\'s a Draw!' );
 		frontEnd.setButtons( frontEnd.buttonsGameOverSinglePlayer );
 		frontEnd.bindButtons();
 		frontEnd.show();
