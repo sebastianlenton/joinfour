@@ -1,8 +1,6 @@
 "use strict"
 //todo:
-
-//do comp detect own potential to make a 4
-//front end CSS
+//refactor, as this is in a bit of a desperate state
 
 var Game = function() {
 	this.won = false;
