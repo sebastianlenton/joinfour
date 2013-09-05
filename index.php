@@ -40,18 +40,6 @@
 		<?php //or, set /favicon.ico for IE10 win ?>
 		<meta name="msapplication-TileColor" content="#f7f7f7">
 		<meta name="msapplication-TileImage" content="/img/win8-tile-icon.png">
-		<script type="text/javascript">
-			console.log( "Don't forget to put in your Google Analytics ID" );
-			var _gaq = _gaq || [];
-			_gaq.push(['_setAccount', 'UA-XXXXX-Y']);
-			_gaq.push(['_trackPageview']);
-			
-			(function() {
-				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-			})();
-		</script>
     </head>
     <body>
     	<p class="hint">

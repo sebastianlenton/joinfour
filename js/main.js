@@ -406,41 +406,43 @@ var Player = function( colour, isComputer ) {
 	}
 	
 	this.calculatedMove = function( board, game, frontEnd ) {
-		var enemyThisPosition = false;
-		for( var w = 0; w < board.widthBlocks; w ++ )	{											//check the player's moves, and that they're not able to join four in next turn - if so, block
+		var winningPosition = false;
+		for( var w = 0; w < board.widthBlocks; w ++ )	{											//check there's a winning move
 			var tempGameState = copyArray( game.gameState );
-			
 			var chipPlace = game.getEmpty( w, board, game.gameState );
 			if( chipPlace !== false ) {																//if the column isn't full
-				var nextTurnColour = game.players[ game.getTurn( true ) ].colour;
-				tempGameState[ w ][ chipPlace ] = nextTurnColour;
-				if( game.checkForWin( w, chipPlace, board, nextTurnColour, tempGameState ) == game.numberToConnect ) {
-					enemyThisPosition = w;
+				var myColour = game.players[ game.getTurn() ].colour;
+				tempGameState[ w ][ chipPlace ] = myColour;
+				if( game.checkForWin( w, chipPlace, board, myColour, tempGameState ) == game.numberToConnect ) {
+					winningPosition = w;
 					break;
 				}
-			}						
-		}								
-		if( enemyThisPosition !== false ) {
-			setTimeout( function() {																//but don't do it instantly - add a delay as "thinking" time
-				game.addChip( enemyThisPosition, board, frontEnd );
+			}
+		}
+		
+		if( winningPosition !== false )	{
+			setTimeout( function() {
+				game.addChip( winningPosition, board, frontEnd );
 			}, this.getThinkingTime() );
 		} else {
-			var winningPosition = false;
-			for( var w = 0; w < board.widthBlocks; w ++ )	{											//check there's no winning move
+			var enemyThisPosition = false;
+			for( var w = 0; w < board.widthBlocks; w ++ )	{											//check the player's moves, and that they're not able to join four in next turn - if so, block
 				var tempGameState = copyArray( game.gameState );
+				
 				var chipPlace = game.getEmpty( w, board, game.gameState );
 				if( chipPlace !== false ) {																//if the column isn't full
-					var myColour = game.players[ game.getTurn() ].colour;
-					tempGameState[ w ][ chipPlace ] = myColour;
-					if( game.checkForWin( w, chipPlace, board, myColour, tempGameState ) == game.numberToConnect ) {
-						winningPosition = w;
+					var nextTurnColour = game.players[ game.getTurn( true ) ].colour;
+					tempGameState[ w ][ chipPlace ] = nextTurnColour;
+					if( game.checkForWin( w, chipPlace, board, nextTurnColour, tempGameState ) == game.numberToConnect ) {
+						enemyThisPosition = w;
 						break;
 					}
-				}
-			}
-			if( winningPosition !== false )	{
-				setTimeout( function() {																//but don't do it instantly - add a delay as "thinking" time
-					game.addChip( winningPosition, board, frontEnd );
+				}						
+			}	
+			
+			if( enemyThisPosition !== false ) {
+				setTimeout( function() {																
+					game.addChip( enemyThisPosition, board, frontEnd );
 				}, this.getThinkingTime() );
 			} else {
 				this.randomMove( board, game, frontEnd );
